@@ -14,3 +14,4 @@ DOM ZAVDANYA 1
 
 # Ctrl + / -> comment
 
+print("test")
