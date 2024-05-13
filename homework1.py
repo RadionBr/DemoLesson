@@ -1,32 +1,24 @@
-"""Програма має виконувати прості математичні дії (+, -, *, /).
-Користувачеві пропонується почерзі ввести числа та дію над цими числами,
- програма, виходячи з дії, обчислює та друкує результат.
-Зробити перевірку на те, що при діленні дільник не дорівнює 0!"""
+# # ДЗ 4.1. Перемістити всі нулі до кінця списку
+# Написати програму, яка переміщає всі нулі у кінець списку.
+# Ваше завдання — змінити список так, щоб усі нулі опинилися наприкінці списку.
+# Порядок ненульових чисел має зберегтися!
 
-#tut nado isspolzovat if i elif
-#usanul case (on dobrotniy)
-#ostalnoe po lekcii chto bilo
 
-chislo = int(input("1. splusovat\n2. otnimanie\n3. umnojenie\n4. delenie\nSelect your choice: "))
+#cikl
+#ciklom spisok i chisla chto ne 0
+#sozdaem noviy spisok
 
-num1 = int(input("Vvedite chislo 1: "))
-num2 = int(input("Vvedite chislo 2: "))
+nums = [0, 1, 0, 12, 3]
 
-match chislo:
-    case 1:
-        result = num1 + num2
-        print("splusovivaem...", result)
-    case 2:
-        result = num1 - num2
-        print("otnimaem", result)
-    case 3:
-        result = num1 * num2
-        print("umnojaem", result)
-    case 4:
-        if num2 == 0:
-            print("oshibka delenia na zero!")
-        else:
-            result = num1 / num2
-            print("delim", result)
-    case _:
-        print("ne verniy vvod")
+# Формуємо новий список з ненульовими елементами (циклом for)
+new_nums = [num for num in nums if num != 0]
+
+# Додаємо нулі в кінець нового списку у кількості, яка відповідає кількості нулів у вихідному списку
+zero_count = nums.count(0)
+new_nums.extend([0] * zero_count)
+
+# Замінюємо вихідний список новим
+nums[:] = new_nums
+
+print(nums)
+
