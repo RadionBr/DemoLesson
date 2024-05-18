@@ -1,454 +1,394 @@
-# умови
-# v1
-# n1 = 10
-# n2 = 20
-# v2
-# n1, n2 = 10, 20  # множинне привласнення
-# print(n1 > n2)
-# print(n1 >= n2)
-# print(n1 < n2)
-# print(n1 <= n2)
-# print(n1 == n2)  # поверне True якщо обидва операнди рівні (однакові)
-# print(n1 != n2)  # поверне True якщо обидва операнди різні
-# #
-# print(1 == 1 and 3 == 3)  # поверне True якщо обидва операнди рівні True, інакше False
-# print(1 == 1 or 2 == 3)  # поверне True якщо хоча б один операнд дорівнює True, інакше False
+# Додаткові завдання по матрицях:
 #
-# is_valid = False
-# print(is_valid)
-# print(not is_valid)  # not -> інверсія, якщо значення False стане True, і навпаки
-
-# print("hello" in "hello world")
-
-###
-# hours = int(input("Enter hours: "))
-
-# v1
-# if hours >= 12:
-#     print("PM")
-# else:
-#     print("AM")
-
-# v2
-# if 12 <= hours < 24:
-#     print("PM")
-# elif 0 <= hours < 12:
-#     print("AM")
-# else:
-#     print("Incorrect hours")
-
-# ввести рейтинг фільму: якщо рейтинг дорівнює 5 або 4 - ок, інакше - погано
-
-# film_rating = int(input("Enter film rating: "))
+# створити матрицю 10 на 10, заповнити рандомними значеннями від 10 до 99
 #
-# if film_rating > 0 and film_rating <= 5:
-#     if film_rating == 4 or film_rating == 5:
-#         print("Film OK!")
-#     else:
-#         print("Film not OK!")
-# else:
-#     print("Incorrect Rating!")
+# вивести на екран
+#
+# - вивести суму чисел головної діагоналі матриці
+#
+# - вивести мінімальне та максимальне значення побічної діагоналі матриці
+#
+# - ввести з клавіатури порядковий номер стовпця - вивести цифри з цього стовпця на екран (аналогічно зробити з рядком)
+#
+# - ввести з клавіатури порядковий номер одного стовпця і потім іншого стовпця і поміняти їх місцями в матрицю
+# (аналогічно зробити з рядком)
 
-###
-# ввести з клавіатури 3 числа
-# - вивести найменше із трьох чисел
-# - кiлькiсть однакових чисел
+#####################################################
 
-# number1 = int(input("Enter first number: "))
-# number2 = int(input("Enter second number: "))
-# number3 = int(input("Enter third number: "))
+# Написати програму, яка переміщає всі нулі у кінець списку.
+# Ваше завдання — змінити список так, щоб усі нулі опинилися наприкінці списку.
+# Порядок ненульових чисел має зберегтися!
 
-# вивести найменше із трьох чисел
+# numbers = [1, 0, 2, 0, 4, 0, 1, 6, 9]
+# new_numbers = []
+#
+# for i in range(len(numbers)):
+#     if numbers[i] > 0:
+#         new_numbers.append(numbers[i])
+#
+# print(new_numbers)
+#
+# count_zeros = numbers.count(0)
+#
+# print(count_zeros)
+#
+# for _ in range(count_zeros):
+#     new_numbers.append(0)
+#
+# print(numbers)
+# print(new_numbers)
 
-# if number1 == number2 == number3:
-#     print("All numbers are equal")
-# else:
-#     if number1 <= number2:
-#         if number1 < number3:
-#             print(number1)
-#         else:
-#             print(number3)
-#     elif number2 <= number3:
-#         if number2 < number1:
-#             print(number2)
-#         else:
-#             print(number1)
-#     elif number3 <= number1:
-#         if number3 < number2:
-#             print(number3)
-#         else:
-#             print(number2)
+#####
+# numbers = [1, 0, 2, 0, 4, 0, 1, 6, 9]
+#
+# my_sum = 0
+#
+# # сумма четных чисел
+# for number in numbers:
+#     if number % 2 == 0:
+#         my_sum += number
+#
+# print(my_sum)
+#
+# # сумма чисел по четным индесам
+# my_sum = 0
+#
+# # сумма четных чисел
+# for index in range(len(numbers)):
+#     if index % 2 == 0:
+#         my_sum += numbers[index]
+#
+# print(my_sum)
 
-# кiлькiсть однакових чисел
+# Створіть список випадкових чисел із випадковою кількістю елементів від 3 до 10.
+# Ваше завдання - створити новий список з 3 елементів початкового списку - першим, третім і другим з кінця.
 
-# if number1 == number2 == number3:
-#     print(3)
-# elif number1 == number2 or number1 == number3 or number2 == number3:
-#     print(2)
-# else:
-#     print(0)
-
-####
-# user_select = int(input("1. Start\n2. Settings\n3. Saved games\n4. Exit\nSelect your choice: "))
+# import random
+#
+# numbers = []
 #
 # # v1
-# if user_select == 1:
-#     print("Starting game...")
-# elif user_select == 2:
-#     print("Settings")
-# elif user_select == 3:
-#     print("Saved games")
-# elif user_select == 4:
-#     print("Exit")
-# else:
-#     print("Invalid input please try again")
+# numbers_len = random.randint(3, 10)
+# for _ in range(numbers_len):
+#     numbers.append(random.randint(3, 10))
+#
+# print(numbers_len)
+# print(numbers)
 #
 # # v2
-# match user_select:
-#     case 1:
-#         print("Starting game...")
-#     case 2:
-#         print("Settings")
-#     case 3:
-#         print("Saved games")
-#     case 4:
-#         print("Exit")
-#     case _:
-#         print("Invalid input please try again")
+# numbers = [random.randint(3, 10) for _ in range(numbers_len)]
+# print(numbers_len)
+# print(numbers)
+#
+# result_numbers = [numbers[0], numbers[2], numbers[-2]]
+# print(result_numbers)
 
-########################################################################################################
-# list
+####
+# i = 1
+# while i < 10:
+#     j = 1
+#     while j < 10:
+#         print(i * j, end=" ")
+#         j += 1
+#     print()
+#
+#     i += 1
+
+#
+# for i in range(1, 10):
+#     for j in range(1, 10):
+#         print(i * j, end=" ")
+#     print()
+
+####
+# for value in 1, 3, "qwer", 12.5, True, 1234:
+#     print(value)
+
+#
+# for i in range(5):
+#     # print("Hello")
+#     print(i, end=" ")
+#
+# print()
+#
+# for i in range(2, 5):
+#     # print("Hello")
+#     print(i, end=" ")
+#
+# print()
+#
+# for i in range(1, 5, 2):
+#     # print("Hello")
+#     print(i, end=" ")
+#
+# print()
+#
+# start, end = 1, 10
+# for i in range(start, end + 1):
+#     print(i, end=" ")
+#
+# print()
+#
+# start, end = 1, 10
+# for i in range(end, start - 1, -1):
+#     # print("Hello")
+#     print(i, end=" ")
+
+######
+# Показати на екран усі прості числа в діапазоні, вказаному користувачем.
+# Число називається простим, якщо воно ділиться без залишку тільки на себе і на одиницю.
+# Наприклад, три - це просте число, а чотири - ні.
+
+# start = int(input("Enter start value: "))
+# end = int(input("Enter end value: "))
+#
+# # v1
+# if start > end:
+#     start, end = end, start
+
+# # v2
+# if start > end:
+#     temp = start
+#     start = end
+#     end = temp
+
+# for number in range(start, end + 1):
+#     is_simple = True
+#
+#     if number < 2:
+#         continue
+#
+#     for i in range(2, number):
+#         if number % i == 0:
+#             is_simple = False
+#             break
+#
+#     if is_simple:
+#         print(number, end=" ")
+
+# #####
+# # v1
+# numbers = [number for number in range(-10, 10) if number % 2 != 0]
+# print(numbers)
+#
+# # v2
 # numbers = []
-# numbers_1 = list()
-# print(type(numbers))
-# print(type(numbers_1))
-
-# numbers = [1, 3, 25, 7, 2, 7]
+#
+# for number in range(-20, 20):
+#     if number % 2 != 0:
+#         numbers.append(number)
 #
 # print(numbers)
 
+####################################
+###
+# message = "hello world"
 # # [] -> індексатори
 # # Індекс - це порядковий номер елемента в колекції (масиві). Note: не всі колекції підтримують індекси.
 # # Індекси рахуються з нуля
-# print(numbers[0])
-#
-# numbers[1] = 11111
-# print(numbers)
-# print(len(numbers))
-# print(numbers[-1])
-#
-# print(numbers[len(numbers) - 1])  # numbers[6]
+# print(message[0])
+# print(len(message))  # кількість символів у рядку
+# # print(message[len(message)])  # IndexError: string index out of range
+# print(message[len(message) - 1])
+# print(message[-1])
 
-####################################
-# for i in range(len(numbers)):
-#     print(numbers[i], end=" ")
+###
+# # string - immutable тип даних, рядок змінити не можна
+# name = "Petya"
+# print(name)
+# # name[1] = "r"  # TypeError: 'str' object does not support item assignment
+# user_name = "Vasya"
+# name = user_name
+# print(name)
+
+# # v1
+# sentence = "Hello, world"
+# for letter in sentence:
+#     print(letter, end=" ")
 #
 # print()
 #
-# for number in numbers:
-#     print(number, end=" ")
-#
-# print()
+# # v2
+# for i in range(len(sentence)):
+#     print(sentence[i], end=" ")
 
-# ###
-# values = ["one", 12, 12.4, True]
-# print(values)
-#
-# #
-# nums = [1, 3] * 5
-# print(nums)
-#
-# #
-# numbers = [1, 3, 25, 7, 2, 7]
-#
-# print(numbers[:])
-# print(numbers[1:5])
-# print(numbers[1:5:2])
-# print(numbers[::-1])
+# # slices (срезы)
+# sentence = "Hello, world"
+# print(sentence[:])
+# print(sentence[0:])
+# print(sentence[2:])
+# print(sentence[2:8])
+# print(sentence[1:10:2])
+# print(sentence[::-1])
 
-# Розкладання списку (декомпозиція)
-# users = ["Vasya", "Petya"]
-# user_1, user_2 = users
-# print(user_1)
-# print(user_2)
-# print(users)
+#
+# name = "Vasya"
+# surname = "Petrov"
+# age = 33
+#
+# fullname = name + " " + surname + " " + str(age)  # конкатенація (додавання рядків)
+# print(fullname)
+#
+#
+# text = "Hello, world" * 3
+# print(text)
+#
+# print("---" * 10)
+
+# a1 = "abc"
+# a2 = "abs"
+#
+# if a1 > a2:
+#     print(a1)
+# else:
+#     print(a2)
+#
+# print(ord("A"))
+# print(chr(99))
 
 ####
+# text = "helLo woRlD"
 #
-# import random
+# # isalpha(): повертає True, якщо рядок складається лише з алфавітних символів
 #
-# print(random.randint(1, 10))
-# NUMS_SIZE = 10
-# numbers = []
+# print(text.isalpha())
+#
+# # islower(): повертає True, якщо рядок складається лише із символів у нижньому регістрі
+#
+# print(text.islower())
+#
+# # isupper(): повертає True, якщо всі символи рядка у верхньому регістрі
+#
+# print(text.isupper())
+#
+# # isdigit(): повертає True, якщо всі символи рядка - цифри
+#
+# print(text.isdigit())
+#
+# # isnumeric(): повертає True, якщо рядок є числом
+#
+# print(text.isnumeric())
+#
+# # startswith(str): повертає True, якщо рядок починається з підрядка str
+#
+# print(text.startswith("helLo"))
+#
+# # endswith(str): повертає True, якщо рядок закінчується на підрядок str
+#
+# print(text.endswith("D"))
+#
+# # lower(): перекладає рядок у нижній регістр
+#
+# print(text.lower())
+#
+# # upper(): перекладає рядок у верхній регістр
+#
+# print(text.upper())
+#
+# # title(): початкові символи всіх слів у рядку перекладаються у верхній регістр
+#
+# print(text.title())
+#
+# # capitalize(): перекладає у верхній регістр першу літеру тільки першого слова рядка
+#
+# print(text.capitalize())
+#
+# fio = input("Enter fio: ").title()
+# print(fio)
+#
+#
+# # lstrip(): видаляє початкові пробіли з рядка
+# text = "helLo woRlD"
+# print(text)
+# print(text.lstrip())
+#
+# # rstrip(): видаляє кінцеві пробіли з рядка
+# print(text)
+# print(text.rstrip())
+#
+# # strip(): видаляє початкові та кінцеві пробіли з рядка
+# print(text)
+# print(text.strip())
+#
+# # ljust(width): якщо довжина рядка менша за параметр width, то праворуч від рядка додаються пробіли,
+# # щоб доповнити значення width, а сам рядок вирівнюється по лівому краю
+# text = "hello world"
+# print(text)
+# print(text.ljust(20))
+#
+# # rjust(width): якщо довжина рядка менша за параметр width, то зліва від рядка додаються пробіли,
+# # щоб доповнити значення width, а сам рядок вирівнюється праворуч
+# text = "hello world"
+# print(text)
+# print(text.rjust(20))
+#
+# # center(width): якщо довжина рядка менша за параметр width,
+# # то ліворуч і праворуч від рядка рівномірно додаються пробіли,
+# # щоб доповнити значення width, а сам рядок вирівнюється по центру
+# text = "hello world"
+# print(text)
+# print(text.center(20))
+#
+# # find(str[, start [, end]): повертає індекс підрядка у рядку. Якщо підрядок не знайдено, повертається число -1
+# text = "hello world"
+# print(text.find("hello"))  # 0
+# print(text.find("l"))  # 2
+# print(text.rfind("l"))  # 9
+#
+# first_found_index = text.find("l")
+# print(text.find("l", first_found_index + 1))
+#
+# print(text.find("p"))  # -1
 # #
-# for i in range(NUMS_SIZE):
-#     numbers.append(random.randint(1, 10))
-# #
-# print(numbers)
-# # # append(item): додає елемент item до кінця списку
-# #
-# numbers.append(2222)
-# print(numbers)
-# #
-# # # insert(index, item): додає елемент item до списку за індексом index
-# #
-# numbers.insert(1, 3333)
-# print(numbers)
-# #
-# # # extend(items): додає набір елементів items до кінця списку
-# #
-# numbers.extend([2, 3, 4])
-# print(numbers)
-# #
-# numbers += [1, 2, 3, 4]  # numbers = numbers + [1, 2, 3, 4]
-# print(numbers)
-# #
-# # # remove(item):видаляє елемент item. Видаляється лише перше входження елемента.
-# # # Якщо елемент не знайдено, генерує виняток ValueError
-# #
-# numbers.remove(2222)
-# print(numbers)
-#
-# # clear(): видалення всіх елементів зі списку
-#
-# numbers.clear()
-# print(numbers)
-#
-# del numbers
-# print(numbers)
-#
-# # index(item): повертає індекс елемента item. Якщо елемент не знайдено, генерує виняток ValueError
-#
-# print(numbers.index(2))
-#
-# # pop([index]): видаляє та повертає елемент за індексом index.
-# # Якщо індекс не передано, просто видаляє останній елемент.
-#
-# result = numbers.pop(0)
-# print(result)
-# print(numbers)
-# #
-# print(numbers.pop())
-# print(numbers)
-# #
-# # # count(item): повертає кількість входжень елемента item до списку
-# #
-# print(numbers.count(3))
-
-# sort([key]): Сортує елементи. За умовчанням сортує за зростанням.
-# Але за допомогою key ми можемо передати функцію сортування.
-# sorted(list, [key]): повертає відсортований список
-
-# v1
-# numbers.sort()
-# print(numbers)
-# v2
-# numbers_sorted = sorted(numbers)
-# print(numbers_sorted)
-# print(numbers)
-
-# people = ["Tom", "bob", "alice", "Sam", "Bill"]
-# v1
-# people.sort()
-# print(people)
-# v2
-# people.sort(key=str.lower)
-# print(people)
-# ##
-# people_sorted = sorted(people, key=str.lower)
-# print(people_sorted)
-# print(people)
-
-# # reverse(): розставляє всі елементи у списку у зворотному порядку
-#
-# numbers.reverse()
-# print(numbers)
-#
-# # copy(): копіює список
-#
-# nums_1 = [1, 3, 5]
-# nums_copy = nums_1.copy()
-# print(nums_1)
-# print(nums_copy)
-# nums_copy[1] = 1111
-# print(nums_1)
-# print(nums_copy)
-#
-# # Крім того, Python надає ряд вбудованих функцій для роботи зі списками:
-# #
-# # len(list): повертає довжину списку
-#
-# print(len(numbers))
-#
-# # min(list): повертає найменший елемент списку
-#
-# print(min(numbers))
-#
-# # max(list): повертає найбільший елемент списку
-#
-# print(max(numbers))
-#
-# users = ["Vasya", "Petya"]
-# print(max(users))
-# #
-# letters = ["ab", "ac"]
-# print(max(letters))
-
-###############
-# text = "hello world. goodbye world."
-# search_item = ". "
-#
-# sentences = text.split(search_item)
-# print(sentences)
-#
-# result = []
-#
-# for sentence in sentences:
-#     result.append(sentence.capitalize())
-#
-# print(result)
-#
-# result_sentence = search_item.join(result)
-# print(result_sentence)
-
-##
-# створити список із 10 випадкових чисел
-# поміняти місцями мінімальне значення з максимальним
-# [3, 1, 4, 2, 5] -> [3, 5, 4, 2, 1]
-
-# numbers = [3, 1, 4, 2, 5]
-# numbers_copy = numbers.copy()
-# #
-# print(numbers)
-# #
-# numbers_copy[numbers.index(min(numbers))], numbers_copy[numbers.index(max(numbers))] = max(numbers), min(numbers)
-# numbers = numbers_copy.copy()
-# #
-# print(numbers)
-#
-# min_value = min(numbers)
-# max_value = max(numbers)
-#
-# min_value_index = numbers.index(min_value)
-# max_value_index = numbers.index(max_value)
-#
-# numbers[min_value_index] = max_value
-# numbers[max_value_index] = min_value
-#
-# print(numbers)
-
-# problem
-# numbers[numbers.index(min(numbers))], numbers[numbers.index(max(numbers))] = 111, 222
-# numbers[numbers.index(min(numbers))] = 111
-# numbers[numbers.index(max(numbers))] = 222
-
-# print(numbers)
-
-###############
-# numbers = ["Vasya", 33, ["dance", "walk"]]
-# print(numbers)
-# print(numbers[2])
-# print(numbers[2][0])
-
-##
-# v1
-# array = [
-#     [1, 3, 2],
-#     [1, 4],
-#     1,
-#     [
-#         [1, 2],
-#         [3, 5]
-#     ]
-# ]
-# print(array[3][1][1])
-# v2
-# matrix = [
-#     [24, 41, 15, 62],
-#     [22, 41, 15, 62],
-#     [25, 42, 11, 66],
-#     [27, 46, 16, 63]
-# ]
-#
-# print(matrix[0][1])
-#
-# for row in matrix:
-#     for number in row:
-#         print(number, end=" ")
-#     print()
-
-#
-# import random
-#
-# matrix = []
-
-# print(matrix)
-# for i in range(10):
-#     matrix.append([])
-#     for j in range(10):
-#         matrix[i].append(random.randint(10, 99))
-#
-# print(matrix)
-#
 # # v1
-# # print(len(matrix))
-# print()
+# for i in range(len(text)):
+#     if text[i] == "l":
+#         print(i)
 #
-# for i in range(len(matrix)):
-#     for j in range(len(matrix[i])):
-#         print(matrix[i][j], end=" ")
-#     print()
-#
-# print()
 # # v2
-# for row in matrix:
-#     for number in row:
-#         print(number, end=" ")
-#     print()
-
-############# CIKLI #### lesson 4
-#i- iteracia / srabativanie cikla
-# usat debuger wsegda/ NAJAD SWERHU NA BUG JUCHOK)
-# i = 0
+# index = 0
 #
-# while i < 10:
-#     print(i, end=" ")
-#     i += 1 # i = i + 1
+# for letter in text:
+#     if letter == "l":
+#         print(index)
+#     index += 1
+
 #
-# print("test")
 
-#### v2
-
-# i = 12
+# # # replace(old, new[, num]): замінює в рядку один підрядок на інший
+# text = "hello world hello"
+# print(text)
 #
-# while True:
-#     print(i)
-#     i += 2
+# text = text.replace("hello", "goodbye", 1)
+# print(text)
 
 
-# v3
-
-# i = 0
+#####
+# import string
+# import random
+#
+# DATA_FOR_PASSWORD = string.ascii_letters + string.digits + string.punctuation
+# MIN_PASSWORD_LENGTH = 8
+# MAX_PASSWORD_LENGTH = 16
+#
 #
 # while True:
+#     password = ""
 #
-#     if i == 5:
-#         print("cont....")
-#         i += 1
-#         continue
+#     while True:
+#         pass_len = int(input(f"Enter password length from {MIN_PASSWORD_LENGTH} to {MAX_PASSWORD_LENGTH}: "))
 #
-#     if i >= 10:
-#         print("break...")
+#         if pass_len > MAX_PASSWORD_LENGTH or pass_len < MIN_PASSWORD_LENGTH:
+#             print(f"Password must be between {MIN_PASSWORD_LENGTH} and {MAX_PASSWORD_LENGTH}")
+#         else:
+#             break
+#
+#     for _ in range(pass_len):
+#         password += random.choice(DATA_FOR_PASSWORD)
+#
+#     print(password)
+#
+#     user_choice = input("Press 'q' for exit\n")
+#
+#     if user_choice == "q":
 #         break
-#
-#     print(i)
-#     i += 1
-
-
-####### cikl for
-
-# for i in range(10):
-#     print("Hello")
-#     # print(i, end=" ")
-
-
