@@ -1,26 +1,24 @@
-# Користувач вводить через дефіс дві літери, Ваше завдання написати програму,
-# яка повертатиме всі символи між ними включно.
-# Жодних перевірок на помилку робити не треба,
-# мінімальне значення завжди менше або дорівнює максимальному.
-# Підказка: Використовуйте модуль string , у якому є string.ascii_letters,
-# з усім набором потрібних букв
+# Написати функцію say_hi, яка представить людину за переданими параметрами.
+#
+# Вхідні дані: Два аргументи рядок(str) та позитивне число(int)
+#
+# Функція має повернути рядок.
+#
+# Замініть pass на Ваше рішення.
+#
+# Copy code
+# def say_hi(name, age):
+#   pass
+#
+# assert say_hi("Alex", 32) == "Hi. My name is Alex and I'm 32 years old", 'Test1'
+# assert say_hi("Frank", 68) == "Hi. My name is Frank and I'm 68 years old", 'Test2'
+# print('ОК')
 
-# "a-c" -> abc
-# "a-a" -> a
-# "s-H" -> stuvwxyzABCDEFGH
-# "a-A" -> abcdefghijklmnopqrstuvwxyzA
 
-import string
+def say_hi(name, age):
+    return f"Hi. My name is {name} and I'm {age} years old"
 
-user_input = input("Введіть дві літери через дефіс: ")
-
-# Peremennimi rozdelyaem na 2 chasti
-start_char, end_char = user_input.split('-')
-
-# usaem string.ascii_letters
-start_index = string.ascii_letters.index(start_char)
-end_index = string.ascii_letters.index(end_char)
-
-result = string.ascii_letters[start_index:end_index + 1]
-
-print(result)
+# Тестування функції
+assert say_hi("Alex", 32) == "Hi. My name is Alex and I'm 32 years old", 'Test1'
+assert say_hi("Frank", 68) == "Hi. My name is Frank and I'm 68 years old", 'Test2'
+print('ОК')
