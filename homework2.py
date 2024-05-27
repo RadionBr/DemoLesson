@@ -1,39 +1,26 @@
-# На вхід функції correct_sentence передається два речення.
-# Необхідно повернути їх виправлену копію так, щоб вони завжди починалися з великої літери та закінчувалися крапкою.
-# Зверніть увагу, що не всі виправлення необхідні.
-# Якщо речення вже закінчується крапкою, додавати ще одну не потрібно, це буде помилкою
-# Вхідні аргументи: string.
-# Вихідні аргументи: string.
-# Замість pass необхідно написати Ваше рішення.
+# Ваше завдання – написати функцію is_palindrome, яка перевірятиме, чи є рядок паліндромом.
+# Паліндромом - це такий рядок, який читається однаково зліва направо
+# і зправа наліво без урахування знаків пунктуації та розмірності букв.
+# Функція приймає на вхід рядок, та повертає булеве значення True або False
+# Приклад:
 #
-# def correct_sentence(text):
-#      pass
-# assert correct_sentence("greetings, friends") == "Greetings, friends.", 'Test1'
-# assert correct_sentence("hello") == "Hello.", 'Test2'
-# assert correct_sentence("Greetings. Friends") == "Greetings. Friends.", 'Test3'
-# assert correct_sentence("Greetings, friends.") == "Greetings, friends.", 'Test4'
-# assert correct_sentence("greetings, friends.") == "Greetings, friends.", 'Test5'
-# print('ОК')
+# def is_palindrome(text):
+#     pass
+# assert is_palindrome('A man, a plan, a canal: Panama') == True, 'Test1'
+# assert is_palindrome('0P') == False, 'Test2'
+# assert is_palindrome('a.') == True, 'Test3'
+# assert is_palindrome('aurora') == False, 'Test4'
+# print("ОК")
 
-import re
+def is_palindrome(text):
+    # Фільтруємо лише літери та цифри, і приводимо до нижнього регістру
+    cleaned_text = ''.join(char.lower() for char in text if char.isalnum())
+    # Порівнюємо очищений рядок із його зворотнім варіантом
+    return cleaned_text == cleaned_text[::-1]
 
-def correct_sentence(text):
-    # Розділення тексту на речення з урахуванням крапок
-    sentences = re.split(r'(?<=[.!?])\s*', text)
-    corrected_sentences = []
-    for sentence in sentences:
-        if sentence:
-            # Забезпечення великої літери на початку
-            sentence = sentence[0].upper() + sentence[1:]
-            # Забезпечення крапки в кінці, якщо її немає
-            if not sentence.endswith('.'):
-                sentence += '.'
-            corrected_sentences.append(sentence)
-    return ' '.join(corrected_sentences)
-
-assert correct_sentence("greetings, friends") == "Greetings, friends.", 'Test1'
-assert correct_sentence("hello") == "Hello.", 'Test2'
-assert correct_sentence("Greetings. Friends") == "Greetings. Friends.", 'Test3'
-assert correct_sentence("Greetings, friends.") == "Greetings, friends.", 'Test4'
-assert correct_sentence("greetings, friends.") == "Greetings, friends.", 'Test5'
-print('ОК')
+# Тести
+assert is_palindrome('A man, a plan, a canal: Panama') == True, 'Test1'
+assert is_palindrome('0P') == False, 'Test2'
+assert is_palindrome('a.') == True, 'Test3'
+assert is_palindrome('aurora') == False, 'Test4'
+print("ОК")

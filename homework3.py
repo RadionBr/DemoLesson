@@ -1,48 +1,31 @@
-# Функція second_index приймає як параметри 2 рядки.
-# Вам необхідно знайти індекс другого входження шуканого рядка у рядку для пошуку.
-# Розберемо перший приклад, де необхідно знайти друге входження "s" в слові "sims".
-# Якби нам треба було знайти її перше входження, то тут все просто:
-# за допомогою функції index або find ми можемо дізнатися, що "s" - це перший символ у слові "sims",
-# а значить індекс першого входження дорівнює 0. Але нам Необхідно визначити другу "s",
-# а вона четверта за рахунком. Значить індекс другого входження (і у відповідь питання) дорівнює 3.
+# Вам необхідно написати функцію find_unique_value, яка приймає список із чисел,
+# знаходить серед них унікальне число та повертати його. Унікальне число - це число,
+# яке зустрічається в списку один раз. Випадок, коли в одному списку буде
+# кілька унікальних чисел, перевіряти не потрібно.
 #
-# Рядок, який потрібно знайти, може складатися з кількох символів.
+# Приклад:
 #
-# Input: Два рядки (String).
-#
-# Output: Int or None
-#
-# Приклади:
-#
-# def second_index(text, some_str):
-#   pass
-# assert second_index("sims", "s") == 3, 'Test1'
-# assert second_index("find the river", "e") == 12, 'Test2'
-# assert second_index("hi", "h") is None, 'Test3'
-# assert second_index("Hello, hello", "lo") == 10, 'Test4'
-# print('ОК')
+# def find_unique_value(some_list):
+#    pass
+# assert find_unique_value([1, 2, 1, 1]) == 2, 'Test1'
+# assert find_unique_value([2, 3, 3, 3, 5, 5]) == 2, 'Test2'
+# assert find_unique_value([5, 5, 5, 2, 2, 0.5]) == 0.5, 'Test3'
+# print("ОК")
 
-def second_index(text, some_str):
-    # Знаходимо перше входження
-    first_index = text.find(some_str)
+from collections import Counter
 
-    # Якщо перше входження не знайдено, то і другого немає
-    if first_index == -1:
-        return None
+def find_unique_value(some_list):
+    # Використовуємо Counter для підрахунку кількості появ кожного елемента в списку
+    count = Counter(some_list)
+    # Проходимо по підрахунках і знаходимо елемент, який зустрічається один раз
+    for num, freq in count.items():
+        if freq == 1:
+            return num
+    # Якщо унікального числа не знайдено, повертаємо None (це необов'язково, залежить від вимог)
+    return None
 
-    # Знаходимо друге входження, починаючи пошук після першого входження
-    second_index = text.find(some_str, first_index + 1)
-
-    # Якщо друге входження знайдено, повертаємо його індекс, інакше повертаємо None
-    if second_index != -1:
-        return second_index
-    else:
-        return None
-
-
-# Тести
-assert second_index("sims", "s") == 3, 'Test1'
-assert second_index("find the river", "e") == 12, 'Test2'
-assert second_index("hi", "h") is None, 'Test3'
-assert second_index("Hello, hello", "lo") == 10, 'Test4'
-print('ОК')
+# Тестування функції
+assert find_unique_value([1, 2, 1, 1]) == 2, 'Test1'
+assert find_unique_value([2, 3, 3, 3, 5, 5]) == 2, 'Test2'
+assert find_unique_value([5, 5, 5, 2, 2, 0.5]) == 0.5, 'Test3'
+print("ОК")

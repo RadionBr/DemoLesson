@@ -1,24 +1,36 @@
-# Написати функцію say_hi, яка представить людину за переданими параметрами.
-#
-# Вхідні дані: Два аргументи рядок(str) та позитивне число(int)
-#
-# Функція має повернути рядок.
-#
-# Замініть pass на Ваше рішення.
-#
-# Copy code
-# def say_hi(name, age):
-#   pass
-#
-# assert say_hi("Alex", 32) == "Hi. My name is Alex and I'm 32 years old", 'Test1'
-# assert say_hi("Frank", 68) == "Hi. My name is Frank and I'm 68 years old", 'Test2'
-# print('ОК')
+# Ваше завдання — написати функцію add_one, яка приймає список із цифр,
+# які у свою чергу є одним числом. До нього необхідно додати 1.
+# Тобто. Вам необхідно з набору цифр, що входять до списку,
+# отримати число, скласти його з 1 і отриману суму, знову розбити на список із цифр.
+# В результаті функція повертає список із цифр, що становлять значення суми.
+# Так зі списку з цифрами [1, 2, 3, 4], має вийти число 1234.
+# До нього додаємо 1, і отримуємо 1235. Після цього потрібно розбити отримане число на складові цифри.
+# У результаті має бути список [1, 2, 3, 5], який повертає функція.
+# Якщо ви хочете себе перевірити, використайте цей unit test
+
+# def add_one(some_list):
+#     pass
+# assert add_one([1, 2, 3, 4]) == [1, 2, 3, 5], 'Test1'
+# assert add_one([9, 9, 9]) == [1, 0, 0, 0], 'Test2'
+# assert add_one([0]) == [1], 'Test3'
+# assert add_one([9]) == [1, 0], 'Test4'
+# print("ОК")
 
 
-def say_hi(name, age):
-    return f"Hi. My name is {name} and I'm {age} years old"
+def add_one(some_list):
+    # Об'єднуємо цифри у рядок
+    num_str = ''.join(map(str, some_list))
 
-# Тестування функції
-assert say_hi("Alex", 32) == "Hi. My name is Alex and I'm 32 years old", 'Test1'
-assert say_hi("Frank", 68) == "Hi. My name is Frank and I'm 68 years old", 'Test2'
-print('ОК')
+    # Перетворюємо рядок у число і додаємо 1
+    new_num = int(num_str) + 1
+
+    # Розбиваємо нове число на цифри і повертаємо список цифр
+    return [int(digit) for digit in str(new_num)]
+
+
+# Тести
+assert add_one([1, 2, 3, 4]) == [1, 2, 3, 5], 'Test1'
+assert add_one([9, 9, 9]) == [1, 0, 0, 0], 'Test2'
+assert add_one([0]) == [1], 'Test3'
+assert add_one([9]) == [1, 0], 'Test4'
+print("ОК")
