@@ -1,26 +1,27 @@
-# Ваше завдання – написати функцію is_palindrome, яка перевірятиме, чи є рядок паліндромом.
-# Паліндромом - це такий рядок, який читається однаково зліва направо
-# і зправа наліво без урахування знаків пунктуації та розмірності букв.
-# Функція приймає на вхід рядок, та повертає булеве значення True або False
-# Приклад:
+# ДЗ 9.2. Різниця між числами
+# Є набір чисел (float або int).
+# Вам потрібно знайти різницю між найбільшим (максимум) і найменшим (мінімум) елементом.
+# Ваша функція difference має вміти працювати з невизначеною кількістю аргументів.
+# Якщо аргументів немає, то функція повертає 0 (нуль).
+# Якщо з 3-м тестом будуть проблеми, використовуйте функцію округлення round(x, 2),
+# де х це число, яке потрібно округлити.
+# Вх. Дані: Змінна кількість аргументів як числа (int, float).
+# Ви. Дані: Різниця між максимумом і мінімумом як число (int, float).
 #
-# def is_palindrome(text):
-#     pass
-# assert is_palindrome('A man, a plan, a canal: Panama') == True, 'Test1'
-# assert is_palindrome('0P') == False, 'Test2'
-# assert is_palindrome('a.') == True, 'Test3'
-# assert is_palindrome('aurora') == False, 'Test4'
-# print("ОК")
+# assert difference(1, 2, 3) == 2, 'Test1'
+# assert difference(5, -5) == 10, 'Test2'
+# assert difference(10.2, -2.2, 0, 1.1, 0.5) == 12.4, 'Test3'
+# assert difference() == 0, 'Test4'
+# print('OK')
 
-def is_palindrome(text):
-    # Фільтруємо лише літери та цифри, і приводимо до нижнього регістру
-    cleaned_text = ''.join(char.lower() for char in text if char.isalnum())
-    # Порівнюємо очищений рядок із його зворотнім варіантом
-    return cleaned_text == cleaned_text[::-1]
+def difference(*args):
+    if not args:  # якщо аргументів немає, повертаємо 0
+        return 0
+    return round(max(args) - min(args), 2)
 
 # Тести
-assert is_palindrome('A man, a plan, a canal: Panama') == True, 'Test1'
-assert is_palindrome('0P') == False, 'Test2'
-assert is_palindrome('a.') == True, 'Test3'
-assert is_palindrome('aurora') == False, 'Test4'
-print("ОК")
+assert difference(1, 2, 3) == 2, 'Test1'
+assert difference(5, -5) == 10, 'Test2'
+assert difference(10.2, -2.2, 0, 1.1, 0.5) == 12.4, 'Test3'
+assert difference() == 0, 'Test4'
+print('OK')
