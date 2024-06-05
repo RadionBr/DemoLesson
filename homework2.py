@@ -1,27 +1,41 @@
-# ДЗ 9.2. Різниця між числами
-# Є набір чисел (float або int).
-# Вам потрібно знайти різницю між найбільшим (максимум) і найменшим (мінімум) елементом.
-# Ваша функція difference має вміти працювати з невизначеною кількістю аргументів.
-# Якщо аргументів немає, то функція повертає 0 (нуль).
-# Якщо з 3-м тестом будуть проблеми, використовуйте функцію округлення round(x, 2),
-# де х це число, яке потрібно округлити.
-# Вх. Дані: Змінна кількість аргументів як числа (int, float).
-# Ви. Дані: Різниця між максимумом і мінімумом як число (int, float).
+# Напишіть функцію first_word, яка у переданому рядку знайде її перше слово.
 #
-# assert difference(1, 2, 3) == 2, 'Test1'
-# assert difference(5, -5) == 10, 'Test2'
-# assert difference(10.2, -2.2, 0, 1.1, 0.5) == 12.4, 'Test3'
-# assert difference() == 0, 'Test4'
+# При розв'язанні задачі зверніть увагу на наступні моменти:
+#
+# У рядку можуть зустрічаються крапки та/або коми
+# Рядок може починатися з літери або, наприклад, з пробілу або точки
+# У слові може бути апостроф і він є частиною слова
+# Весь текст може бути представлений лише одним словом та все
+# Вхідні параметри: Рядок.
+#
+# Вихідні параметри: Рядок.
+
+# def first_word(text):
+#     """ Пошук першого слова """
+#     pass
+#
+# assert first_word("Hello world") == "Hello", 'Test1'
+# assert first_word("greetings, friends") == "greetings", 'Test2'
+# assert first_word("don't touch it") == "don't", 'Test3'
+# assert first_word(".., and so on ...") == "and", 'Test4'
+# assert first_word("hi") == "hi", 'Test5'
+# assert first_word("Hello.World") == "Hello", 'Test6'
 # print('OK')
 
-def difference(*args):
-    if not args:  # якщо аргументів немає, повертаємо 0
-        return 0
-    return round(max(args) - min(args), 2)
+def first_word(text):
+    """Знаходить перше слово в рядку."""
+    # Замінюємо крапки та коми на пробіли
+    text = text.replace('.', ' ').replace(',', ' ')
+    # Розділяємо рядок на слова
+    words = text.split()
+    # Повертаємо перше слово
+    return words[0]
 
 # Тести
-assert difference(1, 2, 3) == 2, 'Test1'
-assert difference(5, -5) == 10, 'Test2'
-assert difference(10.2, -2.2, 0, 1.1, 0.5) == 12.4, 'Test3'
-assert difference() == 0, 'Test4'
+assert first_word("Hello world") == "Hello", 'Test1'
+assert first_word("greetings, friends") == "greetings", 'Test2'
+assert first_word("don't touch it") == "don't", 'Test3'
+assert first_word(".., and so on ...") == "and", 'Test4'
+assert first_word("hi") == "hi", 'Test5'
+assert first_word("Hello.World") == "Hello", 'Test6'
 print('OK')

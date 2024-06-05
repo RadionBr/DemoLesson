@@ -1,284 +1,204 @@
-#### Recursia
-#funnkcia sama sebya vizivaet
-
-# def factorial(number):
-#     if number <= 1:
-#         return 1
-#     #Ffactorial(number -1) -> zapusk rekursii
-#     return number * factorial(number -1)
+# #DECORAOT
 #
-# print(factorial(5))
-
-#STEK - eto kollekcia first in last out
-#recursia - delayet rabotu v obratnom poryadke
-
-
-#princip FIBONACHI
-# f(n) = f(n-1) + f(n-2)
-
-# def fib(number):
-#     if number == 0:
-#         return 0
-#     if number == 1
-#         return 1
-
-
-# def test_func(num1, *args, number=100):
-#     print(args)
-#     print(type(args))
-#     print(num1)
-#     print(number)
+# def additional_logic(func):
+#     def wrapper():
+#         print("Some logic 1")
+#         func()
+#         print("Some logic 2")
+#     return wrapper
 #
-# print(test_func(1, 2, 3, 4, 5, 6, 7, 8))
-
-
-# def test_func(number, **kwargs):
-#     print(kwargs)
-#     print(type(kwargs))
-#     print(number)
+# @additional_logic  #decorator kak ukrashenie
+# def hello():
+#     print("hello")
 #
-# test_func(123, num1=11, num2=33, num4=1111)
+# hello()
 
-
-# def test_func(number, *args, test=10, **kwargs):
-#     print(number)
-#     print(args)
-#     print(test)
-#     print(kwargs)
+# def check_permissions(funk):
+#     def wrapper(role):
+#         if role == 'admin':
+#             print("Perm gra")
+#             funk(role)
+#         else:
+#             print("Perm denied")
+#     return wrapper
 #
-# test_func(100, 1, 2, 3, 4, test=123, num2=33, num4=1111)
-
-
-# def test_func(num1, num2, num3):
-#     print((num1 + num2 + num3) / 3)
+# @check_permissions
+# def get_secret_information(user_role):
+#     print(f"Hi {user_role}, this is secret info")
 #
-# numbers = [1, 2, 3]
+# get_secret_information("user")
+# get_secret_information("admin")
+
+#neskolko decoratorov
+
+# def start(func):
+#     def wrapper(name):
+#         print("Hello", end="")
+#         func(name)
+#     return wrapper
 #
-# test_func(numbers[0], numbers[1], numbers[2])
+# def end(func):
+#     def wrapper(name):
+#         print("good bye", end="")
+#         func(name)
+#     return wrapper
 #
-# test_func(*numbers)
+#
+# @start
+# @end
+# def hello(name):
+#     print(name)
+#
+#
+# hello("Vasya")
 
-# def auth(username, password, secrets):
-#     if username == 'admin' and password == '12345' and secrets =='12345':
-#         print("Sucess")
 
 
-##### GENERATORI ############
+#next primer
 
-# generator = (i for i in range(5))
+
+##### make gen
+
+# generator = (i for i in range(3))
 # print(generator)
-# print(next(generator)) #vichislit sled element
+# print(next(generator))
 # print(next(generator))
 # print(next(generator))
 # print(next(generator))
 # print(next(generator))
 
-#close()
-#throw()
-
-
-# for i in generator:    #for pod kapotom delaet next
+# for i in generator:
 #     print(i)
 
+# def create_generator():
+#     number = 1
+#     while True:
+#         yield number
+#         number += 1
 
+# def my_generator():
+#     yield 1
+#     yield 2
+#     yield 3
 
-def create_gen():
-    number = 1
-    while True:
-        yield number  #yield delaet na pauzu funkciu
-        number += 1
+#### RECURSIVNAYA func
 
-my_gen = create_gen()
-print(my_gen)
-try:
-    for i in my_gen:
-        print(i)
-        if i > 10:
-            # my_gen.close()
-            my_gen.throw(Exception("End!"))
-except Exception as e:
-    print(e)
-
-
-
-# Рекурсія – коли функція викликає сама себе
-# 1. продумати, яке або які параметри функції будуть змінені при рекурсивному виклику
-# 2. визначити умову або умови виходу з рекурсії
-# 3. запустити рекурсію (виклик цієї ж функції)
-
-# 5! => 1 * 2 * ... * 5
-# def factorial(number):
-#     if number <= 1:
-#         return 1
+# import math
+# def find_min_sum_index(numbers:list[int], start_index, end_index, min_sum=math.inf,min_index=0):
+#     if end_index < len(numbers):
+#         current_sum = sum(numbers[start_index:end_index+1])
 #
-#     # factorial(number - 1) -> запуск рекурсії
-#     return number * factorial(number - 1)
-#
-#
-# print(factorial(5))
-#
-#
-# factorial(5) -> 5 * factorial(4) => 120
-# factorial(4) -> 4 * factorial(3) => 24
-# factorial(3) -> 3 * factorial(2) => 6
-# factorial(2) -> 2 * factorial(1) => 2
-# factorial(1) => 1
+#         if current_sum < min_sum:
 
-# Написати рекурсивну функцію знаходження ступеня числа.
 
-# def my_pow(base, exponent):
-#     if exponent <= 1:
-#         return base
+#regular expressions
+
+# import re
 #
-#     return base * my_pow(base, exponent-1)
+# result = re.match(r'he', 'hello world')
+# print(result)
+# print(result.group(0))
+#
+# result = re.search(r'world', 'hello world hello')
+# print(result.start())
+# print(result.end())
+
+
+# #mob mumber (cifri, plus,dlina)
+# import re
+#
+# phone_numbers = ["+38011111111", "421412412412", "142222222333", "++4333004"]
+#
+# for phone_number in phone_numbers:
+#     if re.findall(r"^\+?{9}$", phone_number):
+#         print(phone_number)
+
+# def additional_logic(func):
+#     def wrapper():
+#         print("Some logic 1")
+#         func()
+#         print("Some logic 2")
+#     return wrapper
 #
 #
-# print(my_pow(2, 3))
-# my_pow(2, 3) -> 2 * my_pow(2, 2) => 8
-# my_pow(2, 2) -> 2 * my_pow(2, 1) => 4
-# my_pow(2, 1) => 2
+# @additional_logic
+# def hello():
+#     print("Hello")
+#
+#
+# hello()
+
 
 ####
-# f(n) = f(n-1) + f(n-2)
-# 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
-
-# def fib(number):
-#     if number == 0 or number == 1:
-#         return number
-#
-#     return fib(number - 1) + fib(number - 2)
-
-
-# for i in range(10):
-#     print(fib(i), end=" ")
-
-##############
-
-# def test_func(num1, *args, number=100):
-#     print(args)
-#     print(type(args))
-#     print(num1)
-#     print(number)
+# def check_permissions(func):
+#     def wrapper(role):
+#         if role == 'admin':
+#             print("Permissions granted!")
+#             func(role)
+#         else:
+#             print("Permission denied!")
+#     return wrapper
 #
 #
-# test_func(1, 2, 3, 4, 5, 6, 7, 8, number=12)
-
-
-# def test_func(number, **kwargs):
-#     print(kwargs)
-#     print(type(kwargs))
-#     print(number)
+# @check_permissions
+# def get_secret_information(user_role):
+#     print(f"Hi {user_role}, this is secret information.")
 #
 #
-# test_func(123, num1=11, num2=33, num4=1111)
+# get_secret_information("user")
+# get_secret_information("admin")
+
+####
+# def start(func):
+#     def wrapper(name):
+#         print("Hello ", end="")
+#         func(name)
+#     return wrapper
+#
+#
+# def end(func):
+#     def wrapper(name):
+#         print("Goodbye ", end="")
+#         func(name)
+#     return wrapper
+#
+#
+# @start
+# @end
+# def hello(name):
+#     print(name)
+#
+#
+# hello("Vasya")
 
 ###
-# def test_func(number, *args, test=10, **kwargs):
-#     print(number)
-#     print(args)
-#     print(test)
-#     print(kwargs)
+# def star(func):
+#     def inner(*args, **kwargs):
+#         print("*" * 15)
+#         func(*args, **kwargs)
+#         print("*" * 15)
+#
+#     return inner
 #
 #
-# test_func(100, 1, 2, 3, 4, test=123, num1=11, num2=33, num4=1111)
-
-######
-# def test_func(num1, num2, num3):
-#     print((num1 + num2 + num3) / 3)
+# def percent(func):
+#     def inner(*args, **kwargs):
+#         print("%" * 15)
+#         func(*args, **kwargs)
+#         print("%" * 15)
+#
+#     return inner
 #
 #
-# numbers = [1, 2, 3]
-# # v1
-# test_func(numbers[0], numbers[1], numbers[2])
-# # v2
-# test_func(*numbers)
+# @star
+# @percent
+# def printer(msg):
+#     print(msg)
+#
+#
+# printer("Hello")
 
 ####
-# def auth(username, password, secrets):
-#     if username == 'admin' and password == '12345' and secrets == '12345':
-#         print("Logged in successfully")
-#     else:
-#         print("Fail")
-#
-#
-# def get_auth_data():
-#     return {
-#         'username': 'admin',
-#         'password': '12345',
-#         'secrets': '12345'
-#     }
-#
-#
-# auth_data = get_auth_data()
-# auth(auth_data.get("username"), auth_data.get("password"), auth_data.get("secrets"))
-# auth(**auth_data)
-
-#####
-
-# Генератори колекцій
-# list comprehension
-
-# newlist = [expression for item in iterable (if condition)]
-
-# iterable: джерело даних, що перебирається, в якості якого може виступати список, безліч, послідовність,
-# або навіть функція, яка повертає набір даних, наприклад, range()
-#
-# item: елемент, що витягується з джерела даних
-#
-# expression: вираз, який повертає певне значення. Це значення потім потрапляє в список, що генерується
-#
-# condition: умова, якій повинні відповідати елементи, що витягуються з джерела даних.
-# Якщо елемент НЕ задовольняє умову, він не вибирається. Необов'язковий параметр.
-
-# # v1
-# numbers = [-1, 2, -3, 4, -5, 6, -7, 7]
-# numbers_positive = []
-# for num in numbers:
-#     if num > 0:
-#         numbers_positive.append(num)
-#
-# print(numbers_positive)
-# #
-# # # v2
-# numbers_positive_2 = [num for num in numbers if num > 0]
-# print(numbers_positive_2)
-#
-# #
-# nums = [n for n in range(10)]
-# print(nums)
-#
-# #
-# nums = [n for n in range(10) if n % 2 == 0]
-# print(nums)
-#
-# #
-# users = {1: 'John', 2: 'Peter', 3: 'Max'}
-# names = [name for name in users.values()]
-# print(names)
-#
-# #
-# users_data = [f"{key}: {users[key]}" for key in users.keys() if key > 2]
-# print(users_data)
-#
-# #
-# numbers = [-1, 2, -3, 4, -5, 6, -7, 7]
-# numbers_positive_2 = tuple([num * 2 for num in numbers if num > 0])
-# print(numbers_positive_2)
-#
-# #
-# numbers = [-1, 2, -3, 4, -5, 6, -7, 7]
-# new_numbers = [num * 2 if num > 5 else num for num in numbers if num > 0]
-# print(new_numbers)
-#
-# # #
-# my_dict = {i: i ** 2 for i in range(10)}
-# print(my_dict)
-#
-# #
-# my_set = {i for i in range(10)}
-# print(my_set)
-
-################
 # Генераторні функції
 # Генератор - це об'єкт, який відразу при створенні не обчислює значення всіх своїх елементів
 # generator = (i for i in range(3))
@@ -303,88 +223,169 @@ except Exception as e:
 #
 # my_gen = create_generator()
 # print(my_gen)
-# print(next(my_gen))
-# print(next(my_gen))
-# print(next(my_gen))
-# my_gen.close()
-# print(next(my_gen))
-
 # try:
 #     for i in my_gen:
 #         print(i)
 #         if i > 10:
-#             # my_gen.close()
-#             my_gen.throw(Exception("End!"))
+#             my_gen.close()
+#             # my_gen.throw(Exception("End!"))
 # except Exception as e:
 #     print(e)
 
-#####
-# https://www.programiz.com/python-programming/methods/built-in/abs
-
-# Замикання (closure) представляє функцію, яка запам'ятовує своє лексичне оточення навіть у тому випадку,
-# коли вона виконується поза своєю областю видимості.
-
-# Зовнішня функція, яка визначає деяку область видимості і в якій визначені деякі
-# Змінні та параметри - лексичне оточення
-#
-# Змінні та параметри (лексичне оточення), які визначені у зовнішній функції
-#
-# вкладена функція, яка використовує змінні та параметри зовнішньої функції
-
-# def outer():
-#     number = 10
-#     print("outer")
-#     test = 10
-#     test_2 = 111
-#
-#     def inner():
-#         nonlocal number
-#         number += 1
-#         # print(test)
-#         print(number)
-#         # print("hello")
-#
-#     return inner
-#
-#
-# inner_func = outer()
-# inner_func()
-# inner_func()
-# inner_func()
-
 ####
-# def multiply(number1, number2):
-#     print(number1 * number2, end=" ")
+# Напишіть рекурсивну функцію, яка приймає одновимірний масив із 100 цілих чисел заповнених
+# випадковим чином і знаходить позицію, з якої починається послідовність з 10 чисел, сума яких мінімальна.
+# import math
+# import random
 #
 #
-# for i in range(1, 11):
-#     multiply(2, i)
+# def find_min_sum_index(numbers: list[int], start_index, end_index, min_sum=math.inf, min_index=0):
+#     if end_index < len(numbers):
+#         current_sum = sum(numbers[start_index:end_index+1])
+#
+#         if current_sum < min_sum:
+#             min_sum = current_sum
+#             min_index = start_index
+#
+#         start_index += 1
+#         end_index += 1
+#
+#         print(f"Current sum: {current_sum} and Min sum: {min_sum}")
+#
+#         return find_min_sum_index(numbers, start_index, end_index, min_sum, min_index)
+#
+#     return min_index
+#
+#
+# nums = [random.randint(1, 10) for _ in range(4)]
+# print(nums)
+# result = find_min_sum_index(nums, 0, 1)
+# print(result)
 
 ###
-# def multiply(number1): return lambda number2: number1 * number2
+# \d - відповідає будь-якій одній цифрі і замінює собою вираз [0-9];
+# \D - виключає всі цифри та замінює [^0-9];
+# \w - Замінює будь-яку цифру, букву, а також знак нижнього підкреслення;
+# \W - будь-який символ крім латиниці, цифр або нижнього підкреслення;
+# \s - відповідає будь-якому пробельного символу;
+# \S - описує будь-який непробільний символ.
 #
 #
-# mult_by_2 = multiply(2)
-# for i in range(1, 11):
-#     print(mult_by_2(i), end=" ")
+# . Один символ, крім нового рядка \n.
+# ? 0 або 1 входження шаблону зліва
+# + 1 і більше входжень шаблону зліва
+# * 0 і більше входжень шаблону зліва
+# \w Будь-яка цифра або буква (\W - все, крім букви або цифри)
+# \d Будь-яка цифра [0-9] (\D - все, крім цифри)
+# \s Будь-який символ пробілу (\S - будь-який символ пробілу)
+# \b Кордон слова
+# [..] Один із символів у дужках ([^..] — будь-який символ, крім тих, що у дужках)
+# \ Екранування спеціальних символів (\. означає точку або \+ - знак "плюс")
+# ^ і $ Початок і кінець рядка відповідно
+# {n,m} Від n до m входжень ({,m} - від 0 до m)
+# a|b Відповідає a або b
+# () Групує вираз і повертає знайдений текст
+# \t, \n, \r Символ табуляції, нового рядка та повернення каретки відповідно
+#
+# Для чого використовуються регулярні вирази
+# для визначення потрібного формату, наприклад, телефонного номера або email-адреси;
+# для розбивки рядків на підрядки;
+# для пошуку, заміни та вилучення символів;
+# для швидкого виконання нетривіальних операцій.
+#
+# А ось найбільш популярні методи, які надає модуль:
+#
+# re.match() - Цей метод шукає за заданим шаблоном на початку рядка
+# re.search() - Метод схожий на match(), але шукає не лише на початку рядка
+# re.findall() - Повертає список усіх знайдених збігів.
+# У методу findall() немає обмежень на пошук на початку або в кінці рядка.
+# re.split() - Цей метод поділяє рядок за заданим шаблоном
+# re.sub() - Шукає шаблон у рядку і замінює його на вказаний підрядок.
+# Якщо шаблон не знайдено, рядок залишається незмінним
+# re.compile() - Ми можемо зібрати регулярне вираження в окремий об'єкт, який можна використовувати для пошуку.
+# Це також позбавляє переписування одного і того ж виразу.
 
-###
-# def greeting(text):
-#     def sentence_end(symbol):
-#         def customer_name(name):
-#             print(text + name + symbol)
-#         return customer_name
-#     return sentence_end
+# import re
+
+# result = re.match(r'he', 'hello world hello')
+# print(result)
+# print(result.group(0))
+# #
+# #
+# result = re.search(r'world', 'hello world hello')
+# print(result.start())
+# print(result.end())
+# #
+# #
+# result = re.findall(r'he', 'hello world hello')
+# print(result)
+# #
+# #
+# result = re.split(r'l', 'hello world hello', maxsplit=1)
+# print(result)
+# #
+# result = re.split(r'l', 'hello world hello')
+# print(result)
+# #
+# #
+# pattern = re.compile('hello')
+# result = pattern.findall('hello world hello')
+# print(result)
+
+# result = re.findall(r'.', "It is a long established fact that a reader")
+# print(result)
 #
+# result = re.findall(r'\w', "It is a long established fact that a reader")
+# print(result)
 #
-# # greeting("Hello, ")("!")("Vasya")
-# # greeting("Hello, ")(".")("Petya")
-# main_greeting_func = greeting("Hello, ")("!")
+# result = re.findall(r'\w*', "It is a long established fact that a reader")
+# print(result)
 #
-# users = ["Vasya", "Petya", "Anton"]
+# result = re.findall(r'\w+', "It is a long established fact that a reader")
+# print(result)
 #
-# for user in users:
-#     main_greeting_func(user)
+# result = re.findall(r'\w+$', "It is a long established fact that a reader")
+# print(result)
+#
+# result = re.findall(r'^\w+', "It is a long established fact that a reader")
+# print(result)
+#
+# result = re.findall(r'\w\w', "It is a long established fact that a reader")
+# print(result)
+#
+# result = re.findall(r'\b\w', "It is a long established fact that a reader")
+# print(result)
+#
+# result = re.findall(r'@\w+.\w+', "test1@gmail.com, test2@qqq.com, test3@www.com")
+# print(result)
+#
+# result = re.findall(r'@\w+.(\w+)', "test1@gmail.com, test2@qqq.ua, test3@www.com")
+# print(result)
+#
+# result = re.findall(r'\d{2}-\d{2}-\d{4}', 'Amit 34-3456 12-05-2007, XYZ 56-4532 11-11-2011, ABC 67-8945 12-017-2004')
+# print(result)
+
+# Написати валідації за допомогою регулярних виразів та протестувати на рiзних кейсах:
+# - домашній номер телефону (тільки цифри та довжина номера)
+#
+# - Мобільний номер телефону (тільки цифри, можлива наявність плюса, довжина номера)
+
+# - email (наявність @, домену: gmail.com наприклад, мінімальна довжина та максимальна на ваш вибір)
+#
+# - ПІБ клієнта (3 слова, мінімальна довжина 2 символи, максимальна довжина 20)
+#
+# додатково:
+#
+# - Пароль (мінімально: одна велика літера, одна маленька літера, одна цифра, один символ,
+# довжина пароля – від 8 до 16 символів)
+
+
+
+
+
+
+
+
 
 
 

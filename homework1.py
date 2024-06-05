@@ -1,38 +1,50 @@
-# ДЗ 9.1. Визначити популярність певних слів у тексті
-# На вхід функції popular_words передаються два аргументи. Текст та список слів, популярність яких необхідно визначити.
-# При вирішенні цього завдання зверніть увагу на такі моменти
-# Слова необхідно шукати у всіх регістрах.
-# Тобто. якщо необхідно знайти слово "one", значить для нього будуть підходити слова "one", "One", "oNe", "ONE" і т.д.
-# Шукані слова завжди вказані в нижньому регістрі
-# Якщо слово не знайдено жодного разу, його необхідно повернути у словнику зі значенням 0 (нуль)
-# Вхідні параметри: Текст і масив слів, що шукаються.
-# Вихідні параметри: Словник, у якому ключами є шукані слова та значеннями,
-# скільки разів кожнє слово зустрічаються у орігінальному тексті.
+# Реалізуйте генераторну функцію (з використанням оператора yield),
+# яка повертатиме по одному члену числової послідовності,
+# закон якої задається за допомогою функції користувача.
+# Крім цього параметром генераторної функції повинні бути значення першого члена прогресії та
+# кількість членів, що видаються послідовності (n). Генератор повинен зупинити свою роботу з досягнення n-го члена.
+# Підказка: це завдання дуже схоже на нескінченний лічильник з матеріалів лекції!
+# Потрібно лише обмежити кількість видаваних генератором значень!
 #
-# def popular_words (text, words):
-# pass
-# assert popular_words('''When I was One I had just begun When I was Two I was nearly new ''', ['i', 'was', 'three', 'near']) == { 'i': 4, 'was': 3, 'three': 0, 'near': 0 }, 'Test1' print('OK')
+# def pow(x):
+#     return x ** 2
+#
+# def some_gen(begin, end, func):
+#     """
+#      begin: перший елемент послідовності
+#      end: кількість елементів у послідовності
+#      func: функція, яка формує значення для послідовності
+#     """
+#     ....
+#     yield begin
+#
+# from inspect import isgenerator
+#
+# gen = some_gen(2, 4, pow)
+# assert isgenerator(gen) == True, 'Test1'
+# assert list(gen) == [2, 4, 16, 256], 'Test2'
+# print('OK')
 
+def square(x):
+    return x ** 2
 
-def popular_words(text, words):
-    # Текст до нижнього регістру
-    text = text.lower()
+def some_gen(begin, end, func):
+    """
+     begin: перший елемент послідовності
+     end: кількість елементів у послідовності
+     func: функція, яка формує значення для послідовності
+    """
+    count = 0
+    current = begin
+    while count < end:
+        yield current
+        current = func(current)
+        count += 1
 
-    # Розділити текст на слова
-    words_in_text = text.split()
+from inspect import isgenerator
 
-    # Створити словник для підрахунку
-    word_count = {word: 0 for word in words}
-
-    # Підрахувати кількість появ кожного слова
-    for word in words_in_text:
-        if word in word_count:
-            word_count[word] += 1
-
-    return word_count
-
-
-# Тестування функції
-assert popular_words('''When I was One I had just begun When I was Two I was nearly new ''',
-                     ['i', 'was', 'three', 'near']) == {'i': 4, 'was': 3, 'three': 0, 'near': 0}, 'Test1'
+gen = some_gen(2, 4, square)
+assert isgenerator(gen) == True, 'Test1'
+assert list(gen) == [2, 4, 16, 256], 'Test2'
 print('OK')
+
