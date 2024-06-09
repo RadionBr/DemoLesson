@@ -1,50 +1,41 @@
-# Реалізуйте генераторну функцію (з використанням оператора yield),
-# яка повертатиме по одному члену числової послідовності,
-# закон якої задається за допомогою функції користувача.
-# Крім цього параметром генераторної функції повинні бути значення першого члена прогресії та
-# кількість членів, що видаються послідовності (n). Генератор повинен зупинити свою роботу з досягнення n-го члена.
-# Підказка: це завдання дуже схоже на нескінченний лічильник з матеріалів лекції!
-# Потрібно лише обмежити кількість видаваних генератором значень!
+# ДЗ 11.1. Генератор простих чисел
+# Напишіть функцію-генератор prime_generator,
+# яка повертатиме прості числа. Верхня межа цього діапазону визначається параметром цієї функції.
+# Наприклад, виклик функції
+# list(prime_generator(10)) повинен відповідати послідовності з чисел [2, 3, 5, 7] .
+# Наступне число в цій послідовності - 11 і воно більше 10 тому воно не потрапляє в цей ряд
 #
-# def pow(x):
-#     return x ** 2
-#
-# def some_gen(begin, end, func):
-#     """
-#      begin: перший елемент послідовності
-#      end: кількість елементів у послідовності
-#      func: функція, яка формує значення для послідовності
-#     """
-#     ....
-#     yield begin
+# def prime_generator(end):
+#     pass
 #
 # from inspect import isgenerator
 #
-# gen = some_gen(2, 4, pow)
-# assert isgenerator(gen) == True, 'Test1'
-# assert list(gen) == [2, 4, 16, 256], 'Test2'
-# print('OK')
+# gen = prime_generator(1)
+# assert isgenerator(gen) == True, 'Test0'
+# assert list(prime_generator(10)) == [2, 3, 5, 7], 'Test1'
+# assert list(prime_generator(15)) == [2, 3, 5, 7, 11, 13], 'Test2'
+# assert list(prime_generator(29)) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29], 'Test3'
+# print('Ok')
 
-def square(x):
-    return x ** 2
+def prime_generator(end):
+    def is_prime(n):
+        if n < 2:
+            return False
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
 
-def some_gen(begin, end, func):
-    """
-     begin: перший елемент послідовності
-     end: кількість елементів у послідовності
-     func: функція, яка формує значення для послідовності
-    """
-    count = 0
-    current = begin
-    while count < end:
-        yield current
-        current = func(current)
-        count += 1
+    for num in range(2, end + 1):
+        if is_prime(num):
+            yield num
+
 
 from inspect import isgenerator
 
-gen = some_gen(2, 4, square)
-assert isgenerator(gen) == True, 'Test1'
-assert list(gen) == [2, 4, 16, 256], 'Test2'
-print('OK')
-
+gen = prime_generator(1)
+assert isgenerator(gen) == True, 'Test0'
+assert list(prime_generator(10)) == [2, 3, 5, 7], 'Test1'
+assert list(prime_generator(15)) == [2, 3, 5, 7, 11, 13], 'Test2'
+assert list(prime_generator(29)) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29], 'Test3'
+print('Ok')
