@@ -1,390 +1,531 @@
-###### ALGORITMI SORTUVANNYA TA POSHUK ###########
+###### OOP CLASS AND OBJECTS ########
 
-#napisat validacii // konspekt
+#### FILES #### TEXT FILES ##########
 
-#zapomnit paterni
-#zapomnit spisok oboznacheniy
+##### FILES AND AFTER OOP
+# file - resurs chto zagr v oper pan
+#r - read
+#w - write
+#a - apend file open for zapis
+#b - binary. Use for work with binary files
 
-#### ALGORITMI #####
+#v1
+# try:
+#     my_file = open("hello.txt","w")
+#     try:
+#         my_file.write("hello ds  sd df f a fas f")
+#     except Exception as e:
+#         print(e)
+#     finally:
+#         my_file.close()
+# except Exception as e:
+#     print(e)
+
+# v2
+# with open("hello_1.txt", "w") as test_file:
+#     test_file.write("wwwwwww")
+
+#
+# with open("hello_1.txt", "a") as test_file:
+#     test_file.write("rrrrrrr\n\ttttttt\n")
 
 
-# # """
-# # Написати валідації за допомогою регулярних виразів та протестувати на рiзних кейсах:
-# # - домашній номер телефону (тільки цифри та довжина номера)
-# # - Мобільний номер телефону (тільки цифри, можлива наявність плюса, довжина номера)
-# # - email (наявність @, домену: gmail.com наприклад, мінімальна довжина та максимальна на ваш вибір)
-# # - ПІБ клієнта (3 слова, мінімальна довжина 2 символи, максимальна довжина 20)
-# # додатково:
-# # - Пароль (мінімально: одна велика літера, одна маленька літера, одна цифра,
-# # один символ, довжина пароля – від 8 до 16 символів)
-# # """
-# #
-# import re
-# import random
-# import string
+# with open("hello.txt", "r") as myfile:
+#v1
+    # result = myfile.read()
+    # print(result)
+
+# result = myfile.readline()
+# print(result)
+# result = myfile.readline(1)
+# print(result)
+
+
+# import pickle
 #
-# MIN_SIZE_PASSWORD = 8
-# MAX_SIZE_PASSWORD = 16
+# FILENAME = "notes.dat"
 #
+# users = [
+#     ["John", "1122233"],
+#     ["Rohn", "1122444233"],
+#     ["Kohn", "112233233"]
 #
-# def generate_password(length: int = MIN_SIZE_PASSWORD) -> str:
-#     """
-#     Генерує пароль, який відповідає наступним вимогам:
-#     - мінімум одна велика літера
-#     - мінімум одна маленька літера
-#     - мінімум одна цифра
-#     - мінімум один символ
-#     - загальна довжина пароля - від 8 до 16 символів (за замовчуванням 8)
-#     """
-#     if not (MIN_SIZE_PASSWORD <= length <= MAX_SIZE_PASSWORD):
-#         raise ValueError(f"Довжина пароля повинна бути від {MIN_SIZE_PASSWORD} до {MAX_SIZE_PASSWORD} символів")
+# ]
 #
-#     # Визначаємо набори символів
-#     lower = string.ascii_lowercase
-#     upper = string.ascii_uppercase
-#     digits = string.digits
-#     symbols = "@$!%*?&"
+# with open(FILENAME, "wb") as file:
+#     pickle.dump(users,file)
 #
-#     # Гарантуємо наявність хоча б одного символу з кожного набору
-#     password = [
-#         random.choice(lower),
-#         random.choice(upper),
-#         random.choice(digits),
-#         random.choice(symbols)
-#     ]
-#
-#     # Додаємо випадкові символи для досягнення бажаної довжини пароля
-#     all_chars = lower + upper + digits + symbols
-#     password += [random.choice(all_chars) for _ in range(length - 4)]
-#
-#     # Перемішуємо символи, щоб уникнути передбачуваності
-#     random.shuffle(password)
-#
-#     # Повертаємо пароль як рядок
-#     return ''.join(password)
-#
-#
-# def validation(pattern: str, expression: str) -> bool:
-#     return bool(re.match(pattern, expression))
-#     # Повертає True, якщо вираз відповідає шаблону, інакше - False
-#
-#
-# # 1.
-# expression = ""
-# pattern = r"^\d{5,7}$"
-# print("1. Home phone number can be from 5 to 7 digits long.")
-# while not validation(pattern, expression):
-#     expression = input("Enter your home phone number to verify: ")
-#     if not validation(pattern, expression):
-#         print("Validation Error. Please try again.")
-#     else:
-#         print(f"Validation OK. Number {expression} is valid. It looks like your home phone.")
-# print()
-#
-# # 2.
-# pattern = r"^\+?\d{1,3}\s?\d{1,5}\s?\d{5,8}$"
-# """
-# Код країни в міжнародних номерах зазвичай складається з 1 до 3 цифр. Довжина коду країни залежить від конкретної
-# країни і може змінюватись.
-# Код оператора мобільного зв'язку або міста у телефонних номерах може складатися з різної кількості цифр, залежно
-# від країни та конкретної телефонної системи. Загалом, для мобільних операторів та міських телефонних систем кількість
-# цифр у коді може змінюватись від 1 до 5.
-# Локальний номер телефону без урахування коду країни та коду оператора або міста зазвичай складається з 5 до 8 цифр,
-# залежно від країни та конкретної телефонної системи.
-# """
-# print("2. Mobile phone number can be from 10 to 12 digits long and may optionally contain + at the beginning"
-#       " or spaces after the country code and operator code.")
-# expression = ""
-# while not validation(pattern, expression):
-#     expression = input("Enter your mobile phone number to verify: ")
-#     if not validation(pattern, expression):
-#         print("Validation Error. Please try again.")
-#     else:
-#         print(f"Validation OK. Number {expression} is valid. It looks like your mobile phone.")
-# print()
-#
-# # 3.
-# expression = ""
-# pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-# # ^[0-9a-zA-Z]+[./+_-]{0,1}[0-9a-zA-Z]+[@][a-zA-Z0-9]+[.][a-zA-Z]{2,}$
-# # Цей патерн розбивається на такі частини:
-# # ^[a-zA-Z0-9._%+-]+ - початок рядка повинен містити один або більше символів, які можуть бути літерами (a-z, A-Z),
-# # цифрами (0-9), точками (.), підкресленнями ( _), відсотками (%), плюсами (+) чи мінусами (-).
-# # @ - символ собаки, що розділяє ім'я користувача та домен поштового сервісу.
-# # [a-zA-Z0-9.-]+ - доменне ім'я, що складається з літер, цифр, точок або дефісів.
-# # \. - точка, що відокремлює доменне ім'я від доменного суфікса.
-# # """[a-zA-Z]{2,} - доменний суфікс, що складається з двох або більше букв (наприклад, "com", "org", "net").
-# # Це базовий патерн і він підходить для більшості звичайних адрес електронної пошти, проте варто зауважити, що існують
-# # специфічні випадки адрес, які можуть не задовольняти цей вираз через особливі символи або нові доменні зони.
-# print("3. Example for e-mail address : press@google.com")
-# while not validation(pattern, expression):
-#     expression = input("Enter your e-mail adress to verify: ")
-#     if not validation(pattern, expression):
-#         print("Validation Error. Please try again.")
-#     else:
-#         print(f"Validation OK. Expression {expression} is valid. It looks like e-mail adress.")
-# print()
-#
-# # 4.
-# expression = ""
-# pattern = r"^([A-Za-zА-Яа-яҐЄІЇґєії]{2,20}\s){2}[A-Za-zА-Яа-яҐЄІЇґєії]{2,20}$"
-# print("4. Last name, first name and patronymic of the client (3 words, minimum 2 char, maximum 20 char).")
-# while not validation(pattern, expression):
-#     expression = input("Enter last name, first name and patronymic of the client to verify: ")
-#     if not validation(pattern, expression):
-#         print("Validation Error. Please try again.")
-#     else:
-#         print(
-#             f"Validation OK. Expression {expression} is valid. It looks like last name, first name and patronymic of the client.")
-# print()
-#
-# # 5.
-# expression = ""
-# pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$"
-# # Розшифровка компонентів цього виразу:
-# # ^ і $ - позначають початок і кінець рядка відповідно, що гарантує перевірку всього рядка.
-# # (?=.*[a-z]) - позитивна попередня перевірка, щоб забезпечити наявність хоча б однієї маленької літери.
-# # (?=.*[A-Z]) - позитивна попередня перевірка, щоб забезпечити наявність хоча б однієї великої літери.
-# # (?=.*\d) - позитивна попередня перевірка, щоб забезпечити наявність хоча б однієї цифри.
-# # (?=.*[@$!%*?&]) - позитивна попередня перевірка, щоб забезпечити наявність хоча б одного символу з вказаного набору.
-# # [A-Za-z\d@$!%*?&]{8,16} - вказує на те, що дозволені літери (великі та маленькі), цифри та символи з вказаного набору,
-# # а довжина рядка має бути від 8 до 16 символів.
-# # Цей регулярний вираз гарантує, що пароль буде відповідати всім вказаним вимогам: міститиме велику та маленьку літери,
-# # цифру, спеціальний символ і матиме довжину від 8 до 16 символів.
-# print(f"5. Password (minimum: one capital letter, one small letter, one number, one symbol, password length -"
-#       f" from {MIN_SIZE_PASSWORD} to {MAX_SIZE_PASSWORD} characters). Example for password:"
-#       f" {generate_password()}")
-# while not validation(pattern, expression):
-#     expression = input("Enter your home password to verify: ")
-#     if MIN_SIZE_PASSWORD <= len(expression) <= MAX_SIZE_PASSWORD:
-#         if not validation(pattern, expression):
-#             print("Validation Error. Please try again.")
-#         else:
-#             print(f"Validation OK. Expression {expression} is valid. It looks like your password.")
-#     else:
-#         print("Validation Error. Please try again.")
-# print()
+# with open(FILENAME, "rb") as file:
+#     users_from_file = pickle.load(file)
+#     for users in users_from_file:
+#         print(f"Name: {users[0]} Phone: {user[1]}")
+
+
+#####
+#import shelve #polochka
+#import scv
+#FILENAME = "users.csv"
+
+##### OOP ######
+
+#smotrim na vse kak na obiekti
+#opisanie obiekta
+
+class Car:
+    def __init__(self, name):
+        self.name = name
+    def show_info(self):
+        print(f"My car in garage: {self.name}")
+
+
+bmw = Car("bmw x5")
+toyota = Car("toyota camry")
+nissan = Car("nissan z350")
+rolse = Car("Rolse Royse")
+
+bmw.show_info()
+toyota.show_info()
+nissan.show_info()
+rolse.show_info()
+
+
 
 ###
-# def pow(x):
-#     return x ** 2
+# r (Read). Файл відкривається для читання. Якщо файл не знайдено, то генерується виняток FileNotFoundError
+#
+# w (Write). Файл відкривається для запису. Якщо файл відсутній, він створюється. Якщо такий файл вже є,
+# то він створюється заново, і відповідно старі дані в ньому стираються.
+#
+# a (Append). Файл відкривається для запису. Якщо файл відсутній, він створюється.
+# Якщо подібний файл вже є, дані записуються в його кінець.
+#
+# b (Binary). Використовується для роботи з бінарними файлами. Застосовується разом з іншими режимами – w або r.
+
+# # v1
+# try:
+#     my_file = open("hello.txt", "w")
+#     try:
+#         my_file.write("hello")
+#     except Exception as e:
+#         print(e)
+#     finally:
+#         my_file.close()
+# except Exception as e:
+#     print(e)
+#
+# # v2
+# with open("hello_1.txt", "w") as test_file:
+#     test_file.write("wwwwww")
 #
 #
-# def some_gen(begin, end, func):
-#     """
-#      begin: перший елемент послідовності
-#      end: кількість елементів у послідовності
-#      func: функція, яка формує значення для послідовності
-#     """
-#     for _ in range(end):
-#         yield begin
-#         begin = func(begin)
+# with open("hello_1.txt", "a") as test_file:
+#     test_file.write("rrrrr\ntttttt\n")
+
+
+# with open("hello.txt", "r") as myfile:
+#     # v1
+#     # result = myfile.read()
+#     # print(result)
+#     # v2
+#     # result = myfile.readline()
+#     # print(result)
+#     # result = myfile.readline(1)
+#     # print(result)
+#     # v3
+#     # result = myfile.readlines()
+#     # print(result)
+#     # v4
+#     # for line in myfile:
+#     #     print(line, end="")
+#     # v5
+#     line = myfile.readline()
+#     while line:
+#         print(line, end="")
+#         line = myfile.readline()
+
+####
+# FILENAME = "notes.txt"
+# NOTES_COUNT = 3
 #
+# notes = []
 #
-# from inspect import isgenerator
+# for i in range(NOTES_COUNT):
+#     notes.append(input(f"Enter note: {i + 1}: ").strip())
 #
-# gen = some_gen(2, 4, pow)
-# assert isgenerator(gen) == True, 'Test1'
-# assert list(gen) == [2, 4, 16, 256], 'Test2'
-# print('OK')
-
-################
-import random
-
-
-def generate_random_list(list_len, start_value=1, end_value=100):
-    # v1
-    # nums = []
-    # for i in range(list_len):
-    #     nums.append(random.randint(start_value, end_value))
-    #
-    # return nums
-
-    # v2
-    return [random.randint(start_value, end_value) for _ in range(list_len)]
-
-
-def bubble_sort(nums):
-    swapped = True
-
-    while swapped:
-        swapped = False
-        for i in range(len(nums) - 1):
-            if nums[i] > nums[i + 1]:
-                nums[i], nums[i + 1] = nums[i + 1], nums[i]
-                swapped = True
-
-
-def selection_sort(nums):
-    for i in range(len(nums)):
-        lowest_value_index = i
-        for j in range(i + 1, len(nums)):
-            if nums[j] < nums[lowest_value_index]:
-                lowest_value_index = j
-        nums[i], nums[lowest_value_index] = nums[lowest_value_index], nums[i]
-
-
-def insertion_sort(nums):
-    for i in range(1, len(nums)):
-        item_to_insert = nums[i]
-        # зберігаємо посилання на індекс попереднього значення
-        j = i - 1
-        while j >= 0 and nums[j] > item_to_insert:
-            nums[j + 1] = nums[j]
-            j -= 1
-        # вставка елемента
-        nums[j + 1] = item_to_insert
-
-
-def merge(left_list, right_list):
-    sorted_list = []
-    left_list_index = right_list_index = 0
-    left_list_length, right_list_length = len(left_list), len(right_list)
-
-    for _ in range(left_list_length + right_list_length):
-        if left_list_index < left_list_length and right_list_index < right_list_length:
-            # порівнюємо перші елементи на початку кожного списку
-            # якщо перший елемент лівого підписку менший - додаємо його
-            if left_list[left_list_index] <= right_list[right_list_index]:
-                sorted_list.append(left_list[left_list_index])
-                left_list_index += 1
-            else:
-                # інакше додамо з правого підписку
-                sorted_list.append(right_list[right_list_index])
-                right_list_index += 1
-
-        # якщо досягнуто кінця лівого списку - елементи правого списку додамо до кінця sorted_list
-        elif left_list_index == left_list_length:
-            sorted_list.append(right_list[right_list_index])
-            right_list_index += 1
-        elif right_list_index == right_list_length:
-            sorted_list.append(left_list[left_list_index])
-            left_list_index += 1
-    return sorted_list
-
-
-def merge_sort(nums):
-    if len(nums) <= 1:
-        return nums
-
-    middle_index = len(nums) // 2
-
-    left_list = merge_sort(nums[:middle_index])
-    right_list = merge_sort(nums[middle_index:])
-
-    return merge(left_list, right_list)
-
-
-def partition(nums, low_index, high_index):
-    # вибираємо середній елемент як опорний
-    # так само можливий вибір першого, останнього або довільного ел-тов як опорного
-    pivot = nums[(low_index + high_index) // 2]
-    i = low_index - 1
-    j = high_index + 1
-
-    while True:
-        i += 1
-        while nums[i] < pivot:
-            i += 1
-
-        j -= 1
-        while nums[j] > pivot:
-            j -= 1
-
-        if i >= j:
-            return j
-
-        # Якщо елемент з індексом i (ліворуч від опорного) більше ніж елемент з індексом j (праворуч від опорного) -
-        # то міняємо їх місцями
-        nums[i], nums[j] = nums[j], nums[i]
-
-
-def quick_sort(nums):
-    # допоміжна функція
-    def _quick_sort(items, low_index, high_index):
-        if low_index < high_index:
-            split_index = partition(items, low_index, high_index)
-            _quick_sort(items, low_index, split_index)
-            _quick_sort(items, split_index + 1, high_index)
-
-    _quick_sort(nums, 0, len(nums) - 1)
-
-
+# with open(FILENAME, "a") as file:
+#     for i in range(NOTES_COUNT):
+#         file.write(f"{i + 1}. {notes[i]}\n")
 #
-def linear_search_from_start(nums, search_item) -> int:
-    for i in range(len(nums)):
-        if nums[i] == search_item:
-            return i
-    return -1
+# with open(FILENAME, "r") as file:
+#     print(file.read())
 
-
-def linear_search_from_end(nums, search_item) -> int:
-    for i in range(len(nums) - 1, -1, -1):
-        if nums[i] == search_item:
-            return i
-    return -1
-
-
-# бінарний пошук працює ТІЛЬКИ на відсортованому масиві
-def binary_search(nums, search_item) -> int:
-    first_index = 0
-    last_index = len(nums) - 1
-
-    while first_index <= last_index:
-        middle_index = (first_index + last_index) // 2
-        if nums[middle_index] == search_item:
-            return middle_index
-        else:
-            if search_item < nums[middle_index]:
-                last_index = middle_index - 1
-            else:
-                first_index = middle_index + 1
-
-    return -1  # -1 означає, що значення не знайдено
-
-
-# my_list = generate_random_list(5)
-# print(my_list)
-# bubble_sort(my_list)
-# selection_sort(my_list)
-# insertion_sort(my_list)
-# my_list = merge_sort(my_list)
-# quick_sort(my_list)
-# print(my_list)
+####
+# import pickle
 #
-# numbers = [1, 4, 10, 5, 2, 10, 4, 10, 3]
-# numbers.sort()
-# print(numbers)
-# value = 10
-# # result = linear_search_from_start(numbers, value)
-# # result = linear_search_from_end(numbers, value)
-# result = binary_search(numbers, value)
+# FILENAME = "notes.dat"
 #
-# if result != -1:
-#     print(f"{value} found on index: {result}")
+# users = [
+#     ["John", "123456789"],
+#     ["Peter", "987654321"],
+#     ["Vasya", "1568654156"]
+# ]
+#
+# with open(FILENAME, "wb") as file:
+#     pickle.dump(users, file)  # серіалізація
+#
+# with open(FILENAME, "rb") as file:
+#     users_from_file = pickle.load(file)  # десеріалізація
+#     for user in users_from_file:
+#         print(f"Name: {user[0]} Phone: {user[1]}")
+
+
+# import shelve
+#
+# FILENAME = "notes"
+#
+# with shelve.open(FILENAME) as users:
+#     users["John"] = "123456789"
+#     users["Peter"] = "987654321"
+#     users["Vasya"] = "1568654156"
+#
+# with shelve.open(FILENAME) as users:
+#     users["Petya"] = "12312341234123"
+#     print(users["Petya"])
+#     print(users["John"])
+#
+#     for key in users:
+#         print(f"{key} - {users[key]}")
+#
+#     print(users)
+#     users.pop("John", "not found")
+#
+#     print("-" * 10)
+#
+#     for key in users:
+#         print(f"{key} - {users[key]}")
+
+####
+import csv
+
+FILENAME = "users.csv"
+
+
+# v1
+# users = [
+#     ["John", "123456789"],
+#     ["Peter", "987654321"],
+#     ["Vasya", "1568654156"]
+# ]
+#
+# with open(FILENAME, "w", newline="") as file:
+#     writer = csv.writer(file)
+#     writer.writerows(users)
+#
+# with open(FILENAME, "a", newline="") as file:
+#     user = ["Anton", "111111"]
+#     writer = csv.writer(file)
+#     writer.writerow(user)
+#
+# with open(FILENAME, "r", newline="") as file:
+#     reader = csv.reader(file)
+#     for row in reader:
+#         print(f"{row[0]} - {row[1]}")
+
+# v2
+# users = [
+#     {"name": "John", "phone": "111"},
+#     {"name": "Petya", "phone": "222"},
+#     {"name": "Vasya", "phone": "333"},
+# ]
+#
+# with open(FILENAME, "w", newline="") as file:
+#     columns = ["name", "phone"]
+#     writer = csv.DictWriter(file, fieldnames=columns)
+#     writer.writeheader()
+#
+#     # all users
+#     writer.writerows(users)
+#
+#     # one user
+#     user: dict = {"name": "Test", "phone": "555"}
+#     writer.writerow(user)
+#
+# with open(FILENAME, "r", newline="") as file:
+#     reader = csv.DictReader(file)
+#     for row in reader:
+#         print(row['name'], " - ", row['phone'])
+
+###
+# import os
+
+# os.mkdir("test_folder")
+
+# os.rmdir("test_folder")
+
+# file_name = "users.csv"
+# if os.path.exists(file_name):
+#     os.remove(file_name)
+#     print("File removed!")
 # else:
-#     print(f"{value} not found!")
+#     print("File not found!")
 
-##############
-def closure_example(x):
-    """
-    Реалізує функцію, яка використовує замикання для збереження значення.
+# доп: написати скрипт для видалення всіх файлів вказаної директорії
+#
+# # відносний шлях - щодо поточної директорії (папки, де знаходиться вихідник, який ви запустили)
+# with open("f1/f2/test.txt", "w") as myfile:
+#     myfile.write("hello world")
+# #
+# with open("../../test1.txt", "w") as myfile:
+#     myfile.write("hello world")
+# абсолютний шлях - повний шлях починаючи з диска C://test_folder/...
 
-    :param x: Початкове значення.
-    :return: Функція, яка використовує замикання для збереження значення x.
-    """
-    def inner_function(y):
-        nonlocal x
-        x += y
-        return x
+##
+# создать телефонную книгу с сохранением в файл txt
+# добавление
+# изменение контакта
+# удаление
+# поиск по имени
 
-    return inner_function
+#####
+# class Car:
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def show_info(self):
+#         print(f"My car: {self.name}")
+#
+#
+# bmw = Car("BMW X5")
+# toyota = Car("TOYOTA Camry")
+#
+# bmw.show_info()
+# toyota.show_info()
+
+# ООП - об'єктно орієнтоване програмування
+# Клас - кастомний тип даних, який описує деякий об'єкт.
+# Клас - креслення майбутнього екземпляра об'єкта.
+
+# Інкапсуляція - приховування внутрішньої реалізації та надання санкціонованого доступу
+# до інтерфейсу класу. Як чорна скринька.
+# Абстрагуємося від внутрішньої реалізації.
+
+# Спадкування - створення нового класу на основі вже існуючого.
+# Розширення базового класу – дочірніми/дочірніми класами.
+# Абстрагуємось від базового класу/класів, використовуючи дочірній клас.
+
+# Поліморфізм - один інтерфейс та багато реалізацій.
+# Абстрагуємося від конкретної реалізації
+
+################################################################
+# статичний метод (функція), поле (змінна) відносяться до класу, і до екземпляра
+# статичний ел-т можна використовувати не створюючи екземпляр класу
+# Найчастіше статичні класи використовують для опису конфігів та інших службових об'єктів, там де немає сенсу
+# створювати екземпляри
+# class Test:
+#     # конструктор без параметрів (не за замовчуванням)
+#     def __init__(self):
+#         self.text = "some text"
+#
+#     # конструктор класу - створює екземпляр об'єкту
+#     # def __new__(cls):
+#     #     pass
+#
+#     # для ініціалізації об'єкту
+#     # якщо явно не визначити конструктор __new__ -> то __init__ він створиться автоматично
+#     # def __init__(self):
+#     #     pass
+#
+#     @staticmethod
+#     def show():
+#         print("this is test class")
+#         # print(self.text)
+#
+#     def demo_func(self):
+#         print(f"this is demo func with value: {self.text}")
+#
+#
+# my_test1 = Test()
+# my_test1.show()
+#
+# my_test2 = Test()
+# my_test2.show()
+# my_test2.demo_func()
+#
+# Test.show()
+# Test.demo_func(my_test2)
+
+##
+# class Person:
+#     # __init__ Конструктор класу – дозволяє створити екземпляр класу. Можливо з параметрами та без параметрів.
+#     # self - посилання на контекст класу, екземпляр класу
+#     # контекст класу - все що є частиною класу (экземпляра) -
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#
+#     def show_person(self):
+#         print(f"Name: {self.name} age: {self.age}")
+#
+#
+# user1 = Person("Vasya", 33)
+# user2 = Person("Petya", 44)
+# user1.show_person()
+# user2.show_person()
+# print(user1.name)
+
+# class Item:
+#
+#     def __init__(self, name, price, description, dimensions):
+#         self.price = price
+#         self.description = description
+#         self.dimensions = dimensions
+#         self.name = name
+#
+#     def __str__(self): # lemon, price: 5
+#         # print(self.dimensions)
+#         return f"{self.name}, price: {self.price}"
+#
+#
+# class User:
+#
+#     def __init__(self, name, surname, numberphone):
+#         self.name = name
+#         self.surname = surname
+#         self.numberphone = numberphone
+#
+#     def __str__(self):
+#         return f"{self.name.title()} {self.surname.title()}"
+#
+#
+# class Purchase:
+#     def __init__(self, user):
+#         self.products = {}
+#         self.user = user
+#         self.total = 0
+#
+#     def add_item(self, item, cnt):
+#         self.products[item] = cnt
+#
+#     def __str__(self):
+#         all_products = ""
+#         for product, count in self.products.items():
+#             all_products += f"\n{product.name}: {count} pcs."
+#         return f"User: {self.user}\nItems:{all_products}"
+#
+#     # """
+#     # User: Ivan Ivanov
+#     # Items:
+#     # lemon: 4 pcs.
+#     # apple: 20 pcs.
+#     # """
+#
+#     def get_total(self):
+#         all_sum = 0
+#         for product, count in self.products.items():
+#             all_sum += (product.price * count)
+#         return all_sum
+#
+#
+# lemon = Item('lemon', 5, "yellow", "small")
+# print(lemon)
+# # test1 = lemon.__str__()
+# # print(test1)
+# # test2 = str(lemon)
+# # print(test2)
+# apple = Item('apple', 2, "red", "middle")
+# # print(lemon)  # lemon, price: 5
+# buyer = User("Ivan", "Ivanov", "02628162")
+# print(buyer)  # Ivan Ivanov
+# #
+# cart = Purchase(buyer)
+# cart.add_item(lemon, 4)
+# cart.add_item(apple, 20)
+# print(cart)
+# print(cart.get_total())
+# # """
+# # User: Ivan Ivanov
+# # Items:
+# # lemon: 4 pcs.
+# # apple: 20 pcs.
+# # """
+# assert isinstance(cart.user, User) is True, 'Екземпляр класу User'
+# assert cart.get_total() == 60, "Всього 60"
+# assert cart.get_total() == 60, 'Повинно залишатися 60!'
+# cart.add_item(apple, 10)
+# print(cart)
+# # """
+# # User: Ivan Ivanov
+# # Items:
+# # lemon: 4 pcs.
+# # apple: 10 pcs.
+# # """
+# #
+# assert cart.get_total() == 40
+
+####
+# import re
+#
+# with open("draft.html", "r", encoding="utf-8") as html_file:
+#     for line in html_file:
+#         text = re.findall(r">[a-zA-ZА-Яа-я]+", line)
+#         if len(text) > 0:
+#             print(text)
+
+############
+# 1. Даний текстовий файл. Необхідно створити новий файл, який потрібно переписати з першого файлу всі слова, що складаються не менше ніж з семи літер.
+#
+# 2. Даний текстовий файл. Підрахувати кількість слів у ньому.
+#
+# 3. Створіть програму, яка перевіряє текст на неприпустимі слова.
+#
+# Якщо неприпустиме слово знайдено, його слід замінити на набір символів *.
+#
+# За підсумками роботи програми необхідно показати статистику дій.
+#
+# Наприклад, якщо й у нас є такий текст:
+#
+# To be, or not to be, that is the question, Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take arms against a sea of troubles, And by opposing end them? To die: to sleep; No more; and by a sleep to say we end The heart-ache and the thousand natural shocks That flesh is heir to, 'tis a consummation Devoutly to be wish'd. To die, to sleep
+#
+# Неприпустиме слово: die.
+#
+# Результат:
+#
+# To be, or not to be, that is the question, Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take arms against a sea of troubles, And by opposing end them? To ***: to sleep; No more; and by a sleep to say we end The heart-ache and the thousand natural shocks That flesh is heir to, 'tis a consummation Devoutly to be wish'd. To ***, to sleep.
+#
+# Статистика: 2 заміни слова die.
+#
+# Нотатка:
+#
+# Текст для всіх завдань можна написати самостійно або взяти з Інтернету.
+#
+# Логіка має працювати з будь-яким текстом.
 
 
-closure_instance = closure_example(10)
 
-# Перевірка
-# assert closure_instance(3) == 8
-print(closure_instance(2))
-print(closure_instance(5))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
