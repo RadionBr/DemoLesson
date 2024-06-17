@@ -1,65 +1,73 @@
-# Створіть клас для опису товару (припустимо, це заділ для інтернет-магазину).
-# Як поля товару можете використовувати значення ціни, опис, габарити товару.
-# Створіть пару екземплярів вашого класу та протестуйте їхню роботу.
-# Створіть клас "Покупець". Як поля можна використовувати прізвище, ім'я, по батькові, мобільний телефон і т.д.
-# Створіть клас "Замовлення". Замовлення може містити кілька товарів,
-# причому кількість кожного з товарів може бути різною.
-# Замовлення має бути "підв'язане" до користувача, який його здійснив.
-# Реалізуйте метод обчислення сумарної вартості замовлення.
-# Визначте метод str() для коректного виведення інформації про це замовлення.
-class Product:
-    def __init__(self, name, price, description, dimensions):
-        self.name = name
-        self.price = price
-        self.description = description
-        self.dimensions = dimensions
+# Створити клас цифрового лічильника. У класі реалізувати методи:
+# встановлення максимального значення лічильника,
+# встановлення мінімального значення лічильника
+# встановлення початкового значення лічильника
+# метод step_up збільшує лічильник на 1. Метод можна викликати до тих пір, поки значення досягне максимуму.
+# При досягненні максимуму слід викинути (raise) виняток ValueError, з описом, що досягнуто максимумуʼ
+# метод step_down зменшує лічильник на 1. Метод можна викликати до тих пір, поки значення не досягне мінімуму.
+# При досягненні мінімуму потрібно викинути (raise) виняток ValueError, з описом, що досягнутий мінімум
+# повернення поточного значення лічильника
+# Початкове, мінімальне та максимальне значення лічильника також можуть бути додані
+# в метод ініціалізації екземпляра класу.
+class Counter:
+    def __init__(self, current=1, min_value=0, max_value=10):
+        self.current = current
+        self.min_value = min_value
+        self.max_value = max_value
 
-    def __str__(self):
-        return f"Product: {self.name}, Price: {self.price} UAH, Description: {self.description}, Dimensions: {self.dimensions}"
+    def set_current(self, start):
+        if self.min_value <= start <= self.max_value:
+            self.current = start
+        else:
+            raise ValueError("Початкове значення повинно бути між мінімумом та максимумом")
 
-class Customer:
-    def __init__(self, last_name, first_name, middle_name, phone):
-        self.last_name = last_name
-        self.first_name = first_name
-        self.middle_name = middle_name
-        self.phone = phone
+    def set_max(self, max_max):
+        if max_max >= self.min_value:
+            self.max_value = max_max
+        else:
+            raise ValueError("Максимальне значення повинно бути більше або дорівнювати мінімальному значенню")
 
-    def __str__(self):
-        return f"Покупателя: {self.last_name} {self.first_name} {self.middle_name}, Моб: {self.phone}"
+    def set_min(self, min_min):
+        if min_min <= self.max_value:
+            self.min_value = min_min
+        else:
+            raise ValueError("Мінімальне значення повинно бути менше або дорівнювати максимальному значенню")
 
-class Order:
-    def __init__(self, customer):
-        self.customer = customer
-        self.items = []
+    def step_up(self):
+        if self.current < self.max_value:
+            self.current += 1
+        else:
+            raise ValueError("Досягнуто максимуму")
 
-    def add_product(self, product, quantity):
-        self.items.append((product, quantity))
+    def step_down(self):
+        if self.current > self.min_value:
+            self.current -= 1
+        else:
+            raise ValueError("Досягнуто мінімуму")
 
-    def total_price(self):
-        total = sum(product.price * quantity for product, quantity in self.items)
-        return total
+    def get_current(self):
+        return self.current
 
-    def __str__(self):
-        products_str = "\n".join([f"{product.name} x {quantity}" for product, quantity in self.items])
-        return f"Заказ {self.customer}:\n{products_str}\nСумма за всё: {self.total_price()} ГРН"
+# Тестування
+counter = Counter()
+counter.set_current(7)
+counter.step_up()
+counter.step_up()
+counter.step_up()
+assert counter.get_current() == 10, 'Test1'
+try:
+    counter.step_up()  # ValueError
+except ValueError as e:
+    print(e)  # Достигнут максимум
+assert counter.get_current() == 10, 'Test2'
 
-# Створення екземплярів класів Product
-product1 = Product(name="MacBook m1", price=15000, description="Programing laptop", dimensions="35x25x2 cm")
-product2 = Product(name="Mouse Razer", price=500, description="Wireless mouse", dimensions="10x5x3 cm")
-product3 = Product(name="SmartMonitor m7", price=9500, description="Monitor for work", dimensions="105x54x3 cm")
-product4 = Product(name="Зарядная станция", price=20000, description="PowerPlant", dimensions="105x504x3 cm")
-
-# Створення екземпляра класу Customer
-customer = Customer(last_name="Барило", first_name="Радион", middle_name="Петрович", phone="380637685508")
-
-# Створення екземпляра класу Order
-order = Order(customer)
-
-# Додавання товарів до замовлення
-order.add_product(product1, 1)
-order.add_product(product2, 2)
-order.add_product(product3, 1)
-order.add_product(product4, 3)
-
-# Виведення інформації про замовлення
-print(order)
+counter.set_min(7)
+counter.step_down()
+counter.step_down()
+counter.step_down()
+assert counter.get_current() == 7, 'Test3'
+try:
+    counter.step_down()  # ValueError
+except ValueError as e:
+    print(e)  # Достигнут минимум
+assert counter.get_current() == 7, 'Test4'
