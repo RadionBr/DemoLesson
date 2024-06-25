@@ -1,12 +1,5 @@
-homework1 == ДЗ 14.1. Виняток користувача
-homework2 == ДЗ 14.2. Створення власних модулів
+homework1 == ДЗ 15.1. Клас «Прямокутник
+homework2 == ДЗ 15.2. Клас «Правильний дріб»
 
-Для виконання завдання було створено наступні файли:
-/
-├── human.py
-├── student.py
-├── exceptions.py
-├── group.py
-└── main.py
-
-conspect.py ==  Конспект свій та від викладача
+conspect == конспект уроку 15
+main == інкапсуляці, mixin_classes, magic_methods

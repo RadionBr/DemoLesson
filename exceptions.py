@@ -1,2 +1,0 @@
-class GroupFullException(Exception):
-    pass
